@@ -31,6 +31,8 @@
   ],
   "rules": {
     "prettier/prettier": "error",
+    "camelcase": "off",
+    "react/style-prop-object": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
