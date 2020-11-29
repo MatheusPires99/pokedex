@@ -1,4 +1,7 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   Montserrat_400Regular,
   Montserrat_600SemiBold,
@@ -10,7 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
 
 import theme from './src/styles/theme';
-import Pokemon from './src/pages/Pokemon';
+import Routes from './src/routes';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -24,13 +27,13 @@ const App = () => {
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar style="dark" backgroundColor="#FFF" translucent />
 
       <ThemeProvider theme={theme}>
-        <Pokemon />
+        <Routes />
       </ThemeProvider>
-    </>
+    </NavigationContainer>
   );
 };
 
