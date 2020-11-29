@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import {
   Montserrat_400Regular,
   Montserrat_600SemiBold,
@@ -8,6 +7,10 @@ import {
 } from '@expo-google-fonts/montserrat';
 import { AppLoading } from 'expo';
 import { StatusBar } from 'expo-status-bar';
+import { ThemeProvider } from 'styled-components';
+
+import theme from './src/styles/theme';
+import Pokemon from './src/pages/Pokemon';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -24,11 +27,9 @@ const App = () => {
     <>
       <StatusBar style="dark" backgroundColor="#FFF" translucent />
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 24, fontFamily: 'Montserrat_700Bold' }}>
-          Hello World
-        </Text>
-      </View>
+      <ThemeProvider theme={theme}>
+        <Pokemon />
+      </ThemeProvider>
     </>
   );
 };
