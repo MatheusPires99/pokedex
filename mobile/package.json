@@ -2,6 +2,7 @@
   "name": "@mobile/pokedex",
   "version": "1.0.0",
   "main": "__generated__/AppEntry.js",
+  "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -24,6 +25,5 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-native": "~0.63.2"
-  },
-  "private": true
+  }
 }
