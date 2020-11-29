@@ -40,7 +40,7 @@ export type PokemonSpecie = {
   };
   egg_groups: EggGroup[];
   flavor_text_entries: FlavorTextEntry[];
-  generas: Genera[];
+  genera: Genera[];
   names: Name[];
   order: number;
   evolution_chain: {

@@ -80,6 +80,10 @@ export default class PokemonController {
       text => text.version.name === 'ruby',
     );
 
+    const pokemonGeneraIndex = pokemonSpecieData.genera.findIndex(
+      genera => genera.language.name === 'en',
+    );
+
     const pokemonTypesFormatted = pokemonData.types.map(({ type }) => {
       return {
         name: capitalizeFirstLetter(type.name),
@@ -166,7 +170,9 @@ export default class PokemonController {
         pokemonSpecieData.flavor_text_entries[pokemonFlavorTextIndex]
           .flavor_text,
       image: pokemonData.sprites.other['official-artwork'].front_default,
+      genera: pokemonSpecieData.genera[pokemonGeneraIndex].genus,
       pokedex_number: pokemonData.id.toString().padStart(3, '0'),
+      base_experience: pokemonData.base_experience,
       types: pokemonTypesFormatted,
       stats: pokemonStatsFormatted,
       height: pokemonData.height,
