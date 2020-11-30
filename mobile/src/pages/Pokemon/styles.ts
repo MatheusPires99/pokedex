@@ -1,15 +1,19 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
-export const Container = styled.SafeAreaView`
+const { width } = Dimensions.get('window');
+
+export const Container = styled.View`
   flex: 1;
   position: relative;
   background: #fa6c6c;
 `;
 
-export const Header = styled.View`
+export const Header = styled.SafeAreaView``;
+
+export const HeaderContent = styled.View`
   padding: 0 24px;
   height: 64px;
-  margin-bottom: 16px;
 
   flex-direction: row;
   align-items: center;
@@ -23,7 +27,9 @@ export const GoBackButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const Content = styled.View``;
+export const PokemonSummary = styled.View`
+  z-index: 2;
+`;
 
 export const PokemonImageContainer = styled.View`
   margin-top: 24px;
@@ -32,6 +38,6 @@ export const PokemonImageContainer = styled.View`
 `;
 
 export const PokemonImage = styled.Image`
-  width: 256px;
-  height: 256px;
+  width: ${width <= 375 ? 212 : 256}px;
+  height: ${width <= 375 ? 212 : 256}px;
 `;

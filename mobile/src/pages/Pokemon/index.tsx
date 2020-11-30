@@ -10,11 +10,13 @@ import Block from '../../components/Block';
 import Dots from '../../components/Dots';
 
 import PokemonHeader from './PokemonHeader';
+import PokemonDetails from './PokemonDetails';
 import {
   Container,
   Header,
+  HeaderContent,
   GoBackButton,
-  Content,
+  PokemonSummary,
   PokemonImageContainer,
   PokemonImage,
 } from './styles';
@@ -48,18 +50,22 @@ const Pokemon = () => {
       <Dots />
 
       <Header>
-        <GoBackButton>
-          <Icon name="arrow-left" color={colors.white} size={24} />
-        </GoBackButton>
+        <HeaderContent>
+          <GoBackButton>
+            <Icon name="arrow-left" color={colors.white} size={24} />
+          </GoBackButton>
+        </HeaderContent>
       </Header>
 
-      <Content>
+      <PokemonSummary>
         <PokemonHeader pokemon={pokemon} />
 
         <PokemonImageContainer>
           <PokemonImage source={{ uri: pokemon.image }} />
         </PokemonImageContainer>
-      </Content>
+      </PokemonSummary>
+
+      <PokemonDetails />
     </Container>
   );
 };
