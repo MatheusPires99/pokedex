@@ -22,6 +22,10 @@ const PokemonDetails = () => {
           contentContainerStyle: {
             paddingTop: 48,
           },
+          style: {
+            borderTopLeftRadius: 32,
+            borderTopRightRadius: 32,
+          },
         }}
       >
         {tabs.map((tab, index) => (
