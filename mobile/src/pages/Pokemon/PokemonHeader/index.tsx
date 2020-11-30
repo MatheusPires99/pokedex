@@ -13,7 +13,7 @@ import {
   PokemonGenera,
 } from './styles';
 
-export type PokemonHeaderProps = {
+type PokemonHeaderProps = {
   pokemon: Pokemon;
 };
 
