@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from 'styled-components';
 import { Feather as Icon } from '@expo/vector-icons';
 import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-import api from '../../services/api';
-import { Pokemon as PokemonType } from '../../types/pokemon';
 import Block from '../../components/Block';
 import Dots from '../../components/Dots';
+import usePokemon from '../../hooks/pokemon';
 
 import PokemonHeader from './PokemonHeader';
 import PokemonDetails from './PokemonDetails';
@@ -23,20 +22,9 @@ import {
 
 const Pokemon = () => {
   const { colors } = useTheme();
+  const { pokemon, loading, getPokemon } = usePokemon();
 
-  const [pokemon, setPokemon] = useState({} as PokemonType);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getPokemon() {
-      const response = await api.get<PokemonType>(`pokemons/${4}`);
-
-      setPokemon(response.data);
-      setLoading(false);
-    }
-
-    getPokemon();
-  }, []);
+  getPokemon(4);
 
   if (loading) {
     return <Text>Carregando...</Text>;
