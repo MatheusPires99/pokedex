@@ -8,11 +8,9 @@ export default {
     green: '#41D168',
     blue: '#0055D4',
   },
-  shadows: {
-    default: '2px 6px 15px rgba(0, 0, 0, 0.2)',
-  },
   fonts: {
     regular: 'Montserrat_400Regular',
+    medium: 'Montserrat_500Medium',
     semiBold: 'Montserrat_600SemiBold',
     bold: 'Montserrat_700Bold',
   },
