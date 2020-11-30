@@ -10,7 +10,7 @@ export const Container = styled.View`
   padding: 0 24px;
 `;
 
-export type TabLabelProps = {
+type TabLabelProps = {
   focused: boolean;
 };
 

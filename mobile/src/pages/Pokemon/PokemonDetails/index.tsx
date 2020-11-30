@@ -13,6 +13,7 @@ const PokemonDetails = () => {
   return (
     <Container>
       <Tab.Navigator
+        backBehavior="none"
         tabBarOptions={{
           indicatorStyle: {
             backgroundColor: colors.blue,
@@ -30,7 +31,13 @@ const PokemonDetails = () => {
             component={tab.component}
             options={{
               tabBarLabel: ({ focused }) => (
-                <TabLabel focused={focused}>{tab.name}</TabLabel>
+                <TabLabel
+                  focused={focused}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                >
+                  {tab.name}
+                </TabLabel>
               ),
             }}
           />
