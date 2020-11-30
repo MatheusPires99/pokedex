@@ -2,23 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Feather as Icon } from '@expo/vector-icons';
 import { Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import api from '../../services/api';
 import { Pokemon as PokemonType } from '../../types/pokemon';
+import Block from '../../components/Block';
+import Dots from '../../components/Dots';
 
+import PokemonHeader from './PokemonHeader';
 import {
   Container,
   Header,
   GoBackButton,
   Content,
-  PokemonHeader,
-  PokemonHeaderDiv,
-  Name,
-  PokedexNumber,
-  Types,
-  Type,
-  TypeText,
-  PokemonGenera,
+  PokemonImageContainer,
+  PokemonImage,
 } from './styles';
 
 const Pokemon = () => {
@@ -44,6 +42,11 @@ const Pokemon = () => {
 
   return (
     <Container>
+      <StatusBar style="light" backgroundColor="transparent" translucent />
+
+      <Block />
+      <Dots />
+
       <Header>
         <GoBackButton>
           <Icon name="arrow-left" color={colors.white} size={24} />
@@ -51,23 +54,11 @@ const Pokemon = () => {
       </Header>
 
       <Content>
-        <PokemonHeader>
-          <PokemonHeaderDiv>
-            <Name>{pokemon.name}</Name>
-            <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
-          </PokemonHeaderDiv>
+        <PokemonHeader pokemon={pokemon} />
 
-          <PokemonHeaderDiv style={{ marginTop: 16 }}>
-            <Types>
-              {pokemon.types.map(type => (
-                <Type>
-                  <TypeText>{type.name}</TypeText>
-                </Type>
-              ))}
-            </Types>
-            <PokemonGenera>{pokemon.genera}</PokemonGenera>
-          </PokemonHeaderDiv>
-        </PokemonHeader>
+        <PokemonImageContainer>
+          <PokemonImage source={{ uri: pokemon.image }} />
+        </PokemonImageContainer>
       </Content>
     </Container>
   );
