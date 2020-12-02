@@ -5,13 +5,11 @@ import React, {
   useState,
 } from 'react';
 
-import api from '../services/api';
-import { Pokemon } from '../types/pokemon';
+import { Pokemon } from '../types';
 
 type PokemonContextData = {
   pokemon: Pokemon;
-  loading: boolean;
-  getPokemon: (id: number) => Promise<void>;
+  setPokemon: React.Dispatch<React.SetStateAction<Pokemon>>;
 };
 
 const PokemonContext = createContext<PokemonContextData>(
@@ -20,17 +18,9 @@ const PokemonContext = createContext<PokemonContextData>(
 
 export const PokemonProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [pokemon, setPokemon] = useState({} as Pokemon);
-  const [loading, setLoading] = useState(true);
-
-  async function getPokemon(id: number) {
-    const response = await api.get<Pokemon>(`pokemons/${id}`);
-
-    setPokemon(response.data);
-    setLoading(false);
-  }
 
   return (
-    <PokemonContext.Provider value={{ pokemon, loading, getPokemon }}>
+    <PokemonContext.Provider value={{ pokemon, setPokemon }}>
       {children}
     </PokemonContext.Provider>
   );
