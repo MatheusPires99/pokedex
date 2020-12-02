@@ -35,6 +35,7 @@ export type EggGroup = {
 };
 
 export type Pokemon = {
+  id: number;
   name: string;
   description: string;
   image: string;
@@ -49,3 +50,5 @@ export type Pokemon = {
   evolution?: Evolution[];
   egg_groups: EggGroup[];
 };
+
+export default Pokemon;
