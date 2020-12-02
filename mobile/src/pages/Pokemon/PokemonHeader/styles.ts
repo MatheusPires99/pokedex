@@ -31,6 +31,7 @@ export const Type = styled.View`
   background: ${({ theme }) => theme.colors.white}30;
   padding: 6px 28px;
   border-radius: 16px;
+  margin-right: 8px;
 `;
 
 export const TypeText = styled.Text`
