@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -6,6 +6,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useTheme } from 'styled-components';
 import { Feather as Icon } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import usePokemon from '../../../hooks/pokemon';
 
@@ -24,6 +25,9 @@ type HeaderProps = {
 const Header = ({ translateY }: HeaderProps) => {
   const { colors } = useTheme();
   const { pokemon } = usePokemon();
+  const navigation = useNavigation();
+
+  const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const pokemonNameStyle = useAnimatedStyle(() => {
     return {
@@ -50,7 +54,7 @@ const Header = ({ translateY }: HeaderProps) => {
   return (
     <Container>
       <HeaderContent>
-        <GoBackButton>
+        <GoBackButton onPress={handleGoBack}>
           <Icon name="arrow-left" color={colors.white} size={24} />
         </GoBackButton>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import {
   Extrapolate,
@@ -10,11 +10,13 @@ import {
 } from 'react-native-reanimated';
 import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { useRoute } from '@react-navigation/native';
 
 import Block from '../../components/Block';
 import Dots from '../../components/Dots';
 import { POKEMON_TYPE_COLORS } from '../../constants';
 import usePokemon from '../../hooks/pokemon';
+import { Pokemon as PokemonType } from '../../types';
 
 import Header from './Header';
 import PokemonHeader from './PokemonHeader';
@@ -29,10 +31,17 @@ import {
 
 export const POKEMON_SUMMARY_HEIGHT = 370;
 
-const Pokemon = () => {
-  const { pokemon, loading, getPokemon } = usePokemon();
+interface RouteParams {
+  pokemon: PokemonType;
+}
 
-  getPokemon(6);
+const Pokemon = () => {
+  const route = useRoute();
+  const { setPokemon } = usePokemon();
+
+  const { pokemon } = route.params as RouteParams;
+
+  useEffect(() => setPokemon(pokemon), [pokemon, setPokemon]);
 
   const translateY = useSharedValue(0);
 
@@ -110,10 +119,6 @@ const Pokemon = () => {
       ),
     };
   });
-
-  if (loading) {
-    return <Text>Carregando...</Text>;
-  }
 
   return (
     <Container
