@@ -1,7 +1,4 @@
-export type Pokemon = {
-  name: string;
-  url: string;
-};
+import Pokemon from './pokemon';
 
 export type PokemonApiResult = {
   count: number;
