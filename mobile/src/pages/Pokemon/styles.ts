@@ -11,7 +11,6 @@ type PokemonSummaryProps = {
 export const Container = styled.View`
   flex: 1;
   position: relative;
-  background: #fa6c6c;
 `;
 
 export const PokemonSummary = styled(Animated.View)<PokemonSummaryProps>`

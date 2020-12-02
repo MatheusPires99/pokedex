@@ -13,6 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import Block from '../../components/Block';
 import Dots from '../../components/Dots';
+import { POKEMON_TYPE_COLORS } from '../../constants';
 import usePokemon from '../../hooks/pokemon';
 
 import Header from './Header';
@@ -31,7 +32,7 @@ export const POKEMON_SUMMARY_HEIGHT = 370;
 const Pokemon = () => {
   const { pokemon, loading, getPokemon } = usePokemon();
 
-  getPokemon(3);
+  getPokemon(6);
 
   const translateY = useSharedValue(0);
 
@@ -115,7 +116,12 @@ const Pokemon = () => {
   }
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundColor:
+          POKEMON_TYPE_COLORS[pokemon.types[0].name.toLowerCase()],
+      }}
+    >
       <StatusBar style="light" backgroundColor="transparent" translucent />
 
       <Block />
