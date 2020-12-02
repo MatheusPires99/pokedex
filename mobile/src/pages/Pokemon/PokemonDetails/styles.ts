@@ -1,13 +1,24 @@
 import styled, { css } from 'styled-components/native';
+import Animated from 'react-native-reanimated';
+import { Dimensions } from 'react-native';
+import Constants from 'expo-constants';
 
-export const Container = styled.View`
+const { height } = Dimensions.get('window');
+
+export const Container = styled(Animated.View)`
   flex: 1;
 
   background: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
-  margin-top: -48px;
   padding: 0 24px;
+
+  height: ${height - (Constants.statusBarHeight + 64)}px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
 `;
 
 type TabLabelProps = {
