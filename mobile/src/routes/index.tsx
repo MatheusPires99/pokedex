@@ -1,9 +1,10 @@
 import React from 'react';
+import { Route } from '@react-navigation/native';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { useTheme } from 'styled-components';
 
 import Home from '../pages/Home';
-import Pokemon from '../pages/Pokemon';
+import Pokemon, { RouteParams } from '../pages/Pokemon';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -21,7 +22,15 @@ const Routes = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Pokemon" component={Pokemon} />
+      <Stack.Screen
+        name="Pokemon"
+        component={Pokemon}
+        sharedElementsConfig={(route: Route<string, object | undefined>) => {
+          const { pokemon } = route.params as RouteParams;
+
+          return [`pokemon.${pokemon.id}`];
+        }}
+      />
     </Stack.Navigator>
   );
 };

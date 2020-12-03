@@ -23,4 +23,6 @@ export const Title = styled.Text`
   font-size: 32px;
 `;
 
-export const PokemonsList = styled(FlatList as new () => FlatList<Pokemon>)``;
+export const PokemonsList = styled(FlatList as new () => FlatList<Pokemon>)`
+  flex: 1;
+`;

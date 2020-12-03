@@ -14,7 +14,7 @@ export const Container = styled(RectButton)<ContainerProps>`
   margin: 10px;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
 
   ${props =>
     props.afterThirdCard &&

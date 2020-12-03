@@ -9,7 +9,7 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
-import { useRoute, Route } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 import Block from '../../components/Block';
 import Dots from '../../components/Dots';
@@ -22,9 +22,9 @@ import PokemonSummary from './PokemonSummary';
 import PokemonDetails from './PokemonDetails';
 import { Container, PokemonDetailsContainer } from './styles';
 
-interface RouteParams {
+export type RouteParams = {
   pokemon: PokemonType;
-}
+};
 
 const Pokemon = () => {
   const route = useRoute();
@@ -99,12 +99,6 @@ const Pokemon = () => {
       </Container>
     </>
   );
-};
-
-Pokemon.sharedElements = (route: Route<string, object | undefined>) => {
-  const { pokemon } = route.params as RouteParams;
-
-  return [{ id: `pokemon.${pokemon.id}` }];
 };
 
 export default Pokemon;

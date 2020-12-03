@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
 import Animated from 'react-native-reanimated';
-
-const { width } = Dimensions.get('window');
 
 type ContainerProps = {
   height: number;
@@ -66,6 +63,6 @@ export const PokemonImageContainer = styled(Animated.View)`
 `;
 
 export const PokemonImage = styled.Image`
-  width: ${width <= 375 ? 212 : 256}px;
-  height: ${width <= 375 ? 212 : 256}px;
+  width: 256px;
+  height: 256px;
 `;
