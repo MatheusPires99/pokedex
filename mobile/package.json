@@ -22,6 +22,7 @@
     "expo": "~39.0.2",
     "expo-constants": "~9.2.0",
     "expo-font": "~8.3.0",
+    "expo-keep-awake": "~8.3.0",
     "expo-status-bar": "~1.0.2",
     "expo-yarn-workspaces": "^1.2.1",
     "react": "17.0.1",
