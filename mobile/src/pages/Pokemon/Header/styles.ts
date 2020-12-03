@@ -1,10 +1,12 @@
 import styled from 'styled-components/native';
 
+import { HEADER_HEIGHT } from '../../../constants';
+
 export const Container = styled.SafeAreaView``;
 
 export const HeaderContent = styled.View`
   padding: 0 24px;
-  height: 64px;
+  height: ${HEADER_HEIGHT}px;
 
   flex-direction: row;
   align-items: center;

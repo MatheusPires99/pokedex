@@ -6,7 +6,7 @@ import { ApiListResult } from '../../types';
 import Text from '../../components/Text';
 
 import PokemonCard from './PokemonCard';
-import { Container, Header, HeaderContent, PokemonsList } from './styles';
+import { Container, Header, PokemonsList } from './styles';
 
 const Home = () => {
   const { colors } = useTheme();
@@ -32,11 +32,9 @@ const Home = () => {
   return (
     <Container>
       <Header>
-        <HeaderContent>
-          <Text color={colors.black} size={32} fontWeight="bold">
-            Pokedex
-          </Text>
-        </HeaderContent>
+        <Text color={colors.black} size={32} fontWeight="bold">
+          Pokedex
+        </Text>
       </Header>
 
       <PokemonsList

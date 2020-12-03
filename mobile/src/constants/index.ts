@@ -19,4 +19,6 @@ export const POKEMON_TYPE_COLORS = {
   fairy: '#EE99AC',
 } as const;
 
+export const HEADER_HEIGHT = 64;
+
 export const POKEMON_SUMMARY_HEIGHT = 360;
