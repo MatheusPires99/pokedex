@@ -1,5 +1,5 @@
 {
-  "name": "@mobile/pokedex",
+  "name": "@pokedex/mobile",
   "version": "1.0.0",
   "main": "__generated__/AppEntry.js",
   "private": true,
