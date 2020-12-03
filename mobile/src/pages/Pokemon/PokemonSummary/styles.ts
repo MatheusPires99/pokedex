@@ -1,10 +1,23 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-export const Container = styled.View`
+const { width } = Dimensions.get('window');
+
+type ContainerProps = {
+  height: number;
+};
+
+export const Container = styled(Animated.View)<ContainerProps>`
+  z-index: 2;
+  height: ${props => props.height}px;
+`;
+
+export const Header = styled.View`
   padding: 0 24px;
 `;
 
-export const PokemonHeaderDiv = styled.View`
+export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -44,4 +57,15 @@ export const PokemonGenera = styled.Text`
   font-size: 12px;
   font-family: ${({ theme }) => theme.fonts.semiBold};
   color: ${({ theme }) => theme.colors.white};
+`;
+
+export const PokemonImageContainer = styled(Animated.View)`
+  margin-top: 24px;
+
+  align-items: center;
+`;
+
+export const PokemonImage = styled.Image`
+  width: ${width <= 375 ? 212 : 256}px;
+  height: ${width <= 375 ? 212 : 256}px;
 `;

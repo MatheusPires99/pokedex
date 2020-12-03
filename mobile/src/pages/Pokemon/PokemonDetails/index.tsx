@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -7,7 +7,9 @@ import Animated, {
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme } from 'styled-components';
 
-import { POKEMON_SUMMARY_HEIGHT } from '../index';
+import usePokemon from '../../../hooks/pokemon';
+import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
+import { Pokemon } from '../../../types';
 
 import tabs from './tabs';
 import { Container, TabLabel } from './styles';
@@ -16,10 +18,15 @@ const Tab = createMaterialTopTabNavigator();
 
 type PokemonDetailsProps = {
   translateY: Animated.SharedValue<number>;
+  pokemon: Pokemon;
 };
 
-const PokemonDetails = ({ translateY }: PokemonDetailsProps) => {
+const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
   const { colors } = useTheme();
+
+  const { setPokemon } = usePokemon();
+
+  useEffect(() => setPokemon(pokemon), [pokemon, setPokemon]);
 
   const containerStyle = useAnimatedStyle(() => {
     return {

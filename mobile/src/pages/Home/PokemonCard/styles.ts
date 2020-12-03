@@ -14,6 +14,7 @@ export const Container = styled(RectButton)<ContainerProps>`
   margin: 10px;
   padding: 16px;
   border-radius: 12px;
+  box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.2);
 
   ${props =>
     props.afterThirdCard &&
@@ -37,10 +38,6 @@ export const PokemonName = styled.Text`
 export const PokemonImage = styled.Image`
   width: 72px;
   height: 72px;
-
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
 `;
 
 export const PokedexNumber = styled.Text`

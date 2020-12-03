@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-import usePokemon from '../../../hooks/pokemon';
+import { Pokemon } from '../../../types';
 
 import {
   Container,
@@ -20,14 +20,16 @@ import {
 
 type HeaderProps = {
   translateY: Animated.SharedValue<number>;
+  pokemon: Pokemon;
 };
 
-const Header = ({ translateY }: HeaderProps) => {
+const Header = ({ pokemon, translateY }: HeaderProps) => {
   const { colors } = useTheme();
-  const { pokemon } = usePokemon();
   const navigation = useNavigation();
 
-  const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
+  const handleGoBack = useCallback(() => navigation.navigate('Home'), [
+    navigation,
+  ]);
 
   const pokemonNameStyle = useAnimatedStyle(() => {
     return {

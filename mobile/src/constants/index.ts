@@ -18,3 +18,5 @@ export const POKEMON_TYPE_COLORS = {
   dark: '#705848',
   fairy: '#EE99AC',
 } as const;
+
+export const POKEMON_SUMMARY_HEIGHT = 340;

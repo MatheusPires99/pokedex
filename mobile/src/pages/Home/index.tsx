@@ -43,19 +43,16 @@ const Home = () => {
       <PokemonsList
         data={pokemons.results}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 24 }}
         keyExtractor={pokemon => String(pokemon.id)}
         numColumns={2}
         renderItem={({ item: pokemon, index }) => {
           return (
-            <>
-              <PokemonCard
-                pokemon={pokemon}
-                afterThirdCard={!!(index + 2)}
-                rightItem={!!(index % 2)}
-              />
-
-              {/* {isOddNumber(searchBirds.length) && <EmptyItem />} */}
-            </>
+            <PokemonCard
+              pokemon={pokemon}
+              afterThirdCard={!!(index + 2)}
+              rightItem={!!(index % 2)}
+            />
           );
         }}
       />

@@ -1,8 +1,9 @@
+import React, { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback } from 'react';
+import { SharedElement } from 'react-navigation-shared-element';
 
-import { POKEMON_TYPE_COLORS } from '../../../constants';
 import { Pokemon } from '../../../types';
+import { getColorByPokemonType } from '../../../utils';
 
 import {
   Container,
@@ -33,13 +34,17 @@ const PokemonCard = ({
     });
   }, [navigation, pokemon]);
 
+  const backgroundColor = useMemo(
+    () => getColorByPokemonType(pokemon.types[0].name),
+    [pokemon.types],
+  );
+
   return (
     <Container
       afterThirdCard={afterThirdCard}
       rightItem={rightItem}
       style={{
-        backgroundColor:
-          POKEMON_TYPE_COLORS[pokemon.types[0].name.toLowerCase()],
+        backgroundColor,
       }}
       onPress={handleNavigateToPokemon}
     >
@@ -47,7 +52,12 @@ const PokemonCard = ({
 
       <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
 
-      <PokemonImage source={{ uri: pokemon.image }} />
+      <SharedElement
+        id={`pokemon.${pokemon.id}`}
+        style={{ position: 'absolute', bottom: 8, right: 8 }}
+      >
+        <PokemonImage source={{ uri: pokemon.image }} />
+      </SharedElement>
 
       <Types>
         {pokemon.types.map(type => (

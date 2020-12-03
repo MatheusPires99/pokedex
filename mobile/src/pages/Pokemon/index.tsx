@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import {
   Extrapolate,
@@ -8,28 +8,19 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, Route } from '@react-navigation/native';
 
 import Block from '../../components/Block';
 import Dots from '../../components/Dots';
-import { POKEMON_TYPE_COLORS } from '../../constants';
-import usePokemon from '../../hooks/pokemon';
+import { POKEMON_SUMMARY_HEIGHT } from '../../constants';
 import { Pokemon as PokemonType } from '../../types';
+import { getColorByPokemonType } from '../../utils';
 
 import Header from './Header';
-import PokemonHeader from './PokemonHeader';
+import PokemonSummary from './PokemonSummary';
 import PokemonDetails from './PokemonDetails';
-import {
-  Container,
-  PokemonSummary,
-  PokemonImageContainer,
-  PokemonImage,
-  PokemonDetailsContainer,
-} from './styles';
-
-export const POKEMON_SUMMARY_HEIGHT = 370;
+import { Container, PokemonDetailsContainer } from './styles';
 
 interface RouteParams {
   pokemon: PokemonType;
@@ -37,11 +28,8 @@ interface RouteParams {
 
 const Pokemon = () => {
   const route = useRoute();
-  const { setPokemon } = usePokemon();
 
   const { pokemon } = route.params as RouteParams;
-
-  useEffect(() => setPokemon(pokemon), [pokemon, setPokemon]);
 
   const translateY = useSharedValue(0);
 
@@ -49,10 +37,10 @@ const Pokemon = () => {
     onStart: (event, ctx) => {
       ctx.offsetY = translateY.value;
     },
-    onActive: (event, ctx) => {
+    onActive: (event, ctx: any) => {
       translateY.value = ctx.offsetY + event.translationY;
     },
-    onEnd: (event, ctx) => {
+    onEnd: event => {
       if (event.translationY >= -100) {
         translateY.value = withTiming(0, {
           duration: 200,
@@ -82,76 +70,41 @@ const Pokemon = () => {
     };
   });
 
-  const pokemonImageStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(
-        translateY.value,
-        [0, -100],
-        [1, 0],
-        Extrapolate.CLAMP,
-      ),
-      transform: [
-        {
-          translateY: interpolate(
-            translateY.value,
-            [-100, 0, 200],
-            [-20, 0, 25],
-            Extrapolate.CLAMP,
-          ),
-        },
-      ],
-    };
-  });
-
-  const pokemonSummaryStyle = useAnimatedStyle(() => {
-    return {
-      zIndex: interpolate(
-        translateY.value,
-        [0, -POKEMON_SUMMARY_HEIGHT],
-        [2, -1],
-        Extrapolate.CLAMP,
-      ),
-      opacity: interpolate(
-        translateY.value,
-        [0, -200],
-        [1, 0],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
+  const backgroundColor = useMemo(
+    () => getColorByPokemonType(pokemon.types[0].name),
+    [pokemon.types],
+  );
 
   return (
-    <Container
-      style={{
-        backgroundColor:
-          POKEMON_TYPE_COLORS[pokemon.types[0].name.toLowerCase()],
-      }}
-    >
+    <>
       <StatusBar style="light" backgroundColor="transparent" translucent />
 
       <Block />
       <Dots />
 
-      <Header translateY={translateY} />
-
-      <PokemonSummary
-        height={POKEMON_SUMMARY_HEIGHT}
-        style={pokemonSummaryStyle}
+      <Container
+        style={{
+          backgroundColor,
+        }}
       >
-        <PokemonHeader pokemon={pokemon} />
+        <Header pokemon={pokemon} translateY={translateY} />
 
-        <PokemonImageContainer style={pokemonImageStyle}>
-          <PokemonImage source={{ uri: pokemon.image }} />
-        </PokemonImageContainer>
-      </PokemonSummary>
+        <PokemonSummary pokemon={pokemon} translateY={translateY} />
 
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
-        <PokemonDetailsContainer style={pokemonDetailsStyle}>
-          <PokemonDetails translateY={translateY} />
-        </PokemonDetailsContainer>
-      </PanGestureHandler>
-    </Container>
+        <PanGestureHandler onGestureEvent={onGestureEvent}>
+          <PokemonDetailsContainer style={pokemonDetailsStyle}>
+            <PokemonDetails pokemon={pokemon} translateY={translateY} />
+          </PokemonDetailsContainer>
+        </PanGestureHandler>
+      </Container>
+    </>
   );
+};
+
+Pokemon.sharedElements = (route: Route<string, object | undefined>) => {
+  const { pokemon } = route.params as RouteParams;
+
+  return [{ id: `pokemon.${pokemon.id}` }];
 };
 
 export default Pokemon;

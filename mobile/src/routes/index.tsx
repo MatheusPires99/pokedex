@@ -1,28 +1,29 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { useTheme } from 'styled-components';
 
 import Home from '../pages/Home';
 import Pokemon from '../pages/Pokemon';
 
-const Auth = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
-const AuthRoute: React.FC = () => {
+const Routes = () => {
   const { colors } = useTheme();
 
   return (
-    <Auth.Navigator
+    <Stack.Navigator
       screenOptions={{
+        gestureEnabled: false,
         headerShown: false,
         cardStyle: {
           backgroundColor: colors.white,
         },
       }}
     >
-      <Auth.Screen name="Home" component={Home} />
-      <Auth.Screen name="Pokemon" component={Pokemon} />
-    </Auth.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Pokemon" component={Pokemon} />
+    </Stack.Navigator>
   );
 };
 
-export default AuthRoute;
+export default Routes;
