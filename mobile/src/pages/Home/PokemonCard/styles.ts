@@ -33,6 +33,8 @@ export const PokemonName = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
+
+  align-items: flex-start;
 `;
 
 export const PokemonImage = styled.Image`

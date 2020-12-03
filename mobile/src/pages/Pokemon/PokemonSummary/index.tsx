@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
@@ -59,7 +59,12 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
     <Container height={POKEMON_SUMMARY_HEIGHT} style={pokemonSummaryStyle}>
       <Header>
         <Row>
-          <Name>{pokemon.name}</Name>
+          <View style={{ alignItems: 'flex-start' }}>
+            <SharedElement id={`pokemon.${pokemon.id}.name`}>
+              <Name>{pokemon.name}</Name>
+            </SharedElement>
+          </View>
+
           <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
         </Row>
 
@@ -71,12 +76,13 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
               </Type>
             ))}
           </Types>
+
           <PokemonGenera>{pokemon.genera}</PokemonGenera>
         </Row>
       </Header>
 
       <PokemonImageContainer style={pokemonImageContainerStyle}>
-        <SharedElement id={`pokemon.${pokemon.id}`}>
+        <SharedElement id={`pokemon.${pokemon.id}.image`}>
           <PokemonImage source={{ uri: pokemon.image }} />
         </SharedElement>
       </PokemonImageContainer>

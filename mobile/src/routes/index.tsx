@@ -25,10 +25,27 @@ const Routes = () => {
       <Stack.Screen
         name="Pokemon"
         component={Pokemon}
+        options={{
+          cardStyleInterpolator: ({ current }) => ({
+            cardStyle: {
+              opacity: current.progress,
+            },
+          }),
+        }}
         sharedElementsConfig={(route: Route<string, object | undefined>) => {
           const { pokemon } = route.params as RouteParams;
 
-          return [`pokemon.${pokemon.id}`];
+          return [
+            {
+              id: `pokemon.${pokemon.id}.image`,
+            },
+            {
+              id: `pokemon.${pokemon.id}.name`,
+            },
+            {
+              id: `pokemon.${pokemon.id}.types`,
+            },
+          ];
         }}
       />
     </Stack.Navigator>

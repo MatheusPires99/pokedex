@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
+import { View } from 'react-native';
 
 import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
@@ -48,12 +49,16 @@ const PokemonCard = ({
       }}
       onPress={handleNavigateToPokemon}
     >
-      <PokemonName>{pokemon.name}</PokemonName>
+      <View style={{ alignItems: 'flex-start' }}>
+        <SharedElement id={`pokemon.${pokemon.id}.name`}>
+          <PokemonName>{pokemon.name}</PokemonName>
+        </SharedElement>
+      </View>
 
       <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
 
       <SharedElement
-        id={`pokemon.${pokemon.id}`}
+        id={`pokemon.${pokemon.id}.image`}
         style={{ position: 'absolute', bottom: 8, right: 8 }}
       >
         <PokemonImage source={{ uri: pokemon.image }} />

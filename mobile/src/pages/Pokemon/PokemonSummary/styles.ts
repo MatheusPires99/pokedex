@@ -24,6 +24,8 @@ export const Name = styled.Text`
   font-size: 32px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
+
+  align-items: flex-start;
 `;
 
 export const PokedexNumber = styled.Text`
