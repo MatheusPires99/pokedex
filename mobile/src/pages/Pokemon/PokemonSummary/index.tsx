@@ -1,9 +1,5 @@
 import React from 'react';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import { Animated } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
@@ -24,48 +20,40 @@ import {
 } from './styles';
 
 type PokemonSummaryProps = {
-  translateY: Animated.SharedValue<number>;
+  translateY: Animated.Value;
   pokemon: Pokemon;
 };
 
-const PokemonSummary = ({ translateY, pokemon }: PokemonSummaryProps) => {
-  const pokemonSummaryStyle = useAnimatedStyle(() => {
-    return {
-      zIndex: interpolate(
-        translateY.value,
-        [0, -POKEMON_SUMMARY_HEIGHT],
-        [2, -1],
-        Extrapolate.CLAMP,
-      ),
-      opacity: interpolate(
-        translateY.value,
-        [0, -200],
-        [1, 0],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
+const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
+  const pokemonSummaryStyle = {
+    zIndex: translateY.interpolate({
+      inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
+      outputRange: [-1, 2],
+      extrapolate: 'clamp',
+    }),
+    opacity: translateY.interpolate({
+      inputRange: [-200, 0],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+  };
 
-  const pokemonImageStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(
-        translateY.value,
-        [0, -100],
-        [1, 0],
-        Extrapolate.CLAMP,
-      ),
-      transform: [
-        {
-          translateY: interpolate(
-            translateY.value,
-            [-100, 0, 200],
-            [-20, 0, 25],
-            Extrapolate.CLAMP,
-          ),
-        },
-      ],
-    };
-  });
+  const pokemonImageContainerStyle = {
+    opacity: translateY.interpolate({
+      inputRange: [-100, 0],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+    transform: [
+      {
+        translateY: translateY.interpolate({
+          inputRange: [-100, 0, 200],
+          outputRange: [-20, 0, 25],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
 
   return (
     <Container height={POKEMON_SUMMARY_HEIGHT} style={pokemonSummaryStyle}>
@@ -87,7 +75,7 @@ const PokemonSummary = ({ translateY, pokemon }: PokemonSummaryProps) => {
         </Row>
       </Header>
 
-      <PokemonImageContainer style={pokemonImageStyle}>
+      <PokemonImageContainer style={pokemonImageContainerStyle}>
         <SharedElement id={`pokemon.${pokemon.id}`}>
           <PokemonImage source={{ uri: pokemon.image }} />
         </SharedElement>

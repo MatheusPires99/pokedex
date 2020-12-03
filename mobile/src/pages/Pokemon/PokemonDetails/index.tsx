@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import { Animated } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme } from 'styled-components';
 
@@ -17,7 +13,7 @@ import { Container, TabLabel } from './styles';
 const Tab = createMaterialTopTabNavigator();
 
 type PokemonDetailsProps = {
-  translateY: Animated.SharedValue<number>;
+  translateY: Animated.Value;
   pokemon: Pokemon;
 };
 
@@ -28,22 +24,17 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
 
   useEffect(() => setPokemon(pokemon), [pokemon, setPokemon]);
 
-  const containerStyle = useAnimatedStyle(() => {
-    return {
-      paddingTop: interpolate(
-        translateY.value,
-        [0, -POKEMON_SUMMARY_HEIGHT],
-        [32, 16],
-        Extrapolate.CLAMP,
-      ),
-      marginTop: interpolate(
-        translateY.value,
-        [0, -POKEMON_SUMMARY_HEIGHT],
-        [-48, 0],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
+  const containerStyle = {
+    transform: [
+      {
+        translateY: translateY.interpolate({
+          inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
+          outputRange: [0, -32],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
 
   return (
     <Container style={containerStyle}>

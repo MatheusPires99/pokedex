@@ -1,9 +1,5 @@
 import React, { useCallback } from 'react';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import { Animated } from 'react-native';
 import { useTheme } from 'styled-components';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +15,7 @@ import {
 } from './styles';
 
 type HeaderProps = {
-  translateY: Animated.SharedValue<number>;
+  translateY: Animated.Value;
   pokemon: Pokemon;
 };
 
@@ -31,27 +27,13 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
     navigation,
   ]);
 
-  const pokemonNameStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(
-        translateY.value,
-        [-250, -300],
-        [0, 1],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
-
-  const pokedexNumberStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(
-        translateY.value,
-        [-250, -300],
-        [0, 1],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
+  const textStyle = {
+    opacity: translateY.interpolate({
+      inputRange: [-300, -200],
+      outputRange: [1, 0],
+      extrapolate: 'clamp',
+    }),
+  };
 
   return (
     <Container>
@@ -60,9 +42,9 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
           <Icon name="arrow-left" color={colors.white} size={24} />
         </GoBackButton>
 
-        <PokemonName style={pokemonNameStyle}>{pokemon.name}</PokemonName>
+        <PokemonName style={textStyle}>{pokemon.name}</PokemonName>
 
-        <PokedexNumber style={pokedexNumberStyle}>
+        <PokedexNumber style={textStyle}>
           #{pokemon.pokedex_number}
         </PokedexNumber>
       </HeaderContent>

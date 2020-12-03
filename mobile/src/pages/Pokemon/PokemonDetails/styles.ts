@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import Animated from 'react-native-reanimated';
-import { Dimensions } from 'react-native';
+import { Dimensions, Animated } from 'react-native';
 import Constants from 'expo-constants';
 
 const { height } = Dimensions.get('window');
@@ -11,7 +10,7 @@ export const Container = styled(Animated.View)`
   background: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
-  padding: 0 24px;
+  padding: 16px 24px 0;
 
   height: ${height - (Constants.statusBarHeight + 64)}px;
 

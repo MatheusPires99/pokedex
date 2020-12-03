@@ -1,13 +1,10 @@
 import React, { useMemo } from 'react';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { Animated } from 'react-native';
 import {
-  Extrapolate,
-  interpolate,
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+  PanGestureHandler,
+  PanGestureHandlerStateChangeEvent,
+  State,
+} from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from '@react-navigation/native';
 
@@ -31,44 +28,52 @@ const Pokemon = () => {
 
   const { pokemon } = route.params as RouteParams;
 
-  const translateY = useSharedValue(0);
+  const translateY = new Animated.Value(0);
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart: (event, ctx) => {
-      ctx.offsetY = translateY.value;
-    },
-    onActive: (event, ctx: any) => {
-      translateY.value = ctx.offsetY + event.translationY;
-    },
-    onEnd: event => {
-      if (event.translationY >= -100) {
-        translateY.value = withTiming(0, {
-          duration: 200,
-        });
-      }
-
-      if (event.translationY < -100) {
-        translateY.value = withTiming(-POKEMON_SUMMARY_HEIGHT, {
-          duration: 200,
-        });
-      }
-    },
-  });
-
-  const pokemonDetailsStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateY: interpolate(
-            translateY.value,
-            [-POKEMON_SUMMARY_HEIGHT, 0, 200],
-            [-POKEMON_SUMMARY_HEIGHT, 0, 50],
-            Extrapolate.CLAMP,
-          ),
+  const animatedEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationY: translateY,
         },
-      ],
-    };
-  });
+      },
+    ],
+    { useNativeDriver: true },
+  );
+
+  const onHandlerStateChanged = (event: PanGestureHandlerStateChangeEvent) => {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      let opened = false;
+
+      const { translationY } = event.nativeEvent;
+
+      if (translationY < -100) {
+        opened = true;
+      } else {
+        translateY.flattenOffset();
+      }
+
+      Animated.timing(translateY, {
+        toValue: opened ? -POKEMON_SUMMARY_HEIGHT : 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => {
+        translateY.extractOffset();
+      });
+    }
+  };
+
+  const pokemonDetailsStyle = {
+    transform: [
+      {
+        translateY: translateY.interpolate({
+          inputRange: [-POKEMON_SUMMARY_HEIGHT, 0, 200],
+          outputRange: [-POKEMON_SUMMARY_HEIGHT, 0, 50],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
 
   const backgroundColor = useMemo(
     () => getColorByPokemonType(pokemon.types[0].name),
@@ -91,7 +96,10 @@ const Pokemon = () => {
 
         <PokemonSummary pokemon={pokemon} translateY={translateY} />
 
-        <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <PanGestureHandler
+          onGestureEvent={animatedEvent}
+          onHandlerStateChange={onHandlerStateChanged}
+        >
           <PokemonDetailsContainer style={pokemonDetailsStyle}>
             <PokemonDetails pokemon={pokemon} translateY={translateY} />
           </PokemonDetailsContainer>
