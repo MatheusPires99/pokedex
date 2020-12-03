@@ -56,7 +56,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   };
 
   return (
-    <Container height={POKEMON_SUMMARY_HEIGHT} style={pokemonSummaryStyle}>
+    <Container style={pokemonSummaryStyle}>
       <Header>
         <Row>
           <View style={{ alignItems: 'flex-start' }}>

@@ -17,7 +17,7 @@ import { getColorByPokemonType } from '../../utils';
 import Header from './Header';
 import PokemonSummary from './PokemonSummary';
 import PokemonDetails from './PokemonDetails';
-import { Container, PokemonDetailsContainer } from './styles';
+import { Container, Content, PokemonDetailsContainer } from './styles';
 
 export type RouteParams = {
   pokemon: PokemonType;
@@ -92,18 +92,20 @@ const Pokemon = () => {
           backgroundColor,
         }}
       >
-        <Header pokemon={pokemon} translateY={translateY} />
+        <Content>
+          <Header pokemon={pokemon} translateY={translateY} />
 
-        <PokemonSummary pokemon={pokemon} translateY={translateY} />
+          <PokemonSummary pokemon={pokemon} translateY={translateY} />
 
-        <PanGestureHandler
-          onGestureEvent={animatedEvent}
-          onHandlerStateChange={onHandlerStateChanged}
-        >
-          <PokemonDetailsContainer style={pokemonDetailsStyle}>
-            <PokemonDetails pokemon={pokemon} translateY={translateY} />
-          </PokemonDetailsContainer>
-        </PanGestureHandler>
+          <PanGestureHandler
+            onGestureEvent={animatedEvent}
+            onHandlerStateChange={onHandlerStateChanged}
+          >
+            <PokemonDetailsContainer style={pokemonDetailsStyle}>
+              <PokemonDetails pokemon={pokemon} translateY={translateY} />
+            </PokemonDetailsContainer>
+          </PanGestureHandler>
+        </Content>
       </Container>
     </>
   );

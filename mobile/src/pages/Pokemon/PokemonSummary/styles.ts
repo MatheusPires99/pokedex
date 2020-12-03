@@ -1,16 +1,14 @@
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
 
-type ContainerProps = {
-  height: number;
-};
+import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 
-export const Container = styled(Animated.View)<ContainerProps>`
-  z-index: 2;
-  height: ${props => props.height}px;
+export const Container = styled(Animated.View)`
+  height: ${POKEMON_SUMMARY_HEIGHT}px;
 `;
 
 export const Header = styled.View`
+  flex: 1;
   padding: 0 24px;
 `;
 
@@ -24,8 +22,6 @@ export const Name = styled.Text`
   font-size: 32px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
-
-  align-items: flex-start;
 `;
 
 export const PokedexNumber = styled.Text`
