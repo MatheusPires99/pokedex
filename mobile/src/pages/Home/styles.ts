@@ -18,11 +18,6 @@ export const HeaderContent = styled.View`
   align-items: center;
 `;
 
-export const Title = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.bold};
-  font-size: 32px;
-`;
-
 export const PokemonsList = styled(FlatList as new () => FlatList<Pokemon>)`
   flex: 1;
 `;

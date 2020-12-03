@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import { Dimensions, Animated } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -18,21 +18,4 @@ export const Container = styled(Animated.View)`
   top: 0;
   right: 0;
   left: 0;
-`;
-
-type TabLabelProps = {
-  focused: boolean;
-};
-
-export const TabLabel = styled.Text<TabLabelProps>`
-  font-family: ${({ theme }) => theme.fonts.semiBold};
-  color: ${({ theme }) => theme.colors.grey};
-  font-size: 14px;
-
-  ${props =>
-    props.focused &&
-    css`
-      font-family: ${({ theme }) => theme.fonts.bold};
-      color: ${({ theme }) => theme.colors.black};
-    `}
 `;

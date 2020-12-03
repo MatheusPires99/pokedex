@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
+import Text from '../../../components/Text';
+
 type ContainerProps = {
   afterThirdCard: boolean;
   rightItem: boolean;
@@ -29,21 +31,12 @@ export const Container = styled(RectButton)<ContainerProps>`
     `}
 `;
 
-export const PokemonName = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.bold};
-  color: ${({ theme }) => theme.colors.white};
-`;
-
 export const PokemonImage = styled.Image`
   width: 72px;
   height: 72px;
 `;
 
-export const PokedexNumber = styled.Text`
-  font-size: 10px;
-  font-family: ${({ theme }) => theme.fonts.semiBold};
-  color: ${({ theme }) => theme.colors.black}30;
-
+export const PokedexNumber = styled(Text)`
   position: absolute;
   right: 10px;
   top: 10px;
@@ -60,10 +53,4 @@ export const Type = styled.View`
   padding: 4px 12px;
   border-radius: 16px;
   margin-top: 4px;
-`;
-
-export const TypeText = styled.Text`
-  font-size: 8px;
-  font-family: ${({ theme }) => theme.fonts.semiBold};
-  color: ${({ theme }) => theme.colors.white};
 `;

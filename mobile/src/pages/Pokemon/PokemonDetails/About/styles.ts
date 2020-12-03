@@ -17,14 +17,3 @@ export const PokemonProportionsContainer = styled.View`
 `;
 
 export const PokemonProportions = styled.View``;
-
-export const ProportionsTitle = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.semiBold};
-  color: ${({ theme }) => theme.colors.grey};
-  margin-bottom: 8px;
-`;
-
-export const ProportionsNumber = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.bold};
-  color: ${({ theme }) => theme.colors.black};
-`;

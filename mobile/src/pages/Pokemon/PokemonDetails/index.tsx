@@ -6,9 +6,10 @@ import { useTheme } from 'styled-components';
 import usePokemon from '../../../hooks/pokemon';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 import { Pokemon } from '../../../types';
+import Text from '../../../components/Text';
 
 import tabs from './tabs';
-import { Container, TabLabel } from './styles';
+import { Container } from './styles';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -58,13 +59,14 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
             component={tab.component}
             options={{
               tabBarLabel: ({ focused }) => (
-                <TabLabel
-                  focused={focused}
+                <Text
+                  color={focused ? colors.black : colors.grey}
+                  fontWeight={focused ? 'bold' : 'semiBold'}
                   numberOfLines={1}
                   adjustsFontSizeToFit
                 >
                   {tab.name}
-                </TabLabel>
+                </Text>
               ),
             }}
           />

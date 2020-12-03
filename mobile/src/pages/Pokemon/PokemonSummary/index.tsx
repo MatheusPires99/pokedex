@@ -2,6 +2,7 @@ import React from 'react';
 import { Animated, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
+import Text from '../../../components/Text';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 import { Pokemon } from '../../../types';
 
@@ -9,12 +10,8 @@ import {
   Container,
   Header,
   Row,
-  Name,
-  PokedexNumber,
   Types,
   Type,
-  TypeText,
-  PokemonGenera,
   PokemonImageContainer,
   PokemonImage,
 } from './styles';
@@ -61,23 +58,27 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         <Row>
           <View style={{ alignItems: 'flex-start' }}>
             <SharedElement id={`pokemon.${pokemon.id}.name`}>
-              <Name>{pokemon.name}</Name>
+              <Text size={32} fontWeight="bold">
+                {pokemon.name}
+              </Text>
             </SharedElement>
           </View>
 
-          <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
+          <Text size={16} fontWeight="bold">
+            #{pokemon.pokedex_number}
+          </Text>
         </Row>
 
         <Row style={{ marginTop: 16 }}>
           <Types>
             {pokemon.types.map(type => (
               <Type key={type.url}>
-                <TypeText>{type.name}</TypeText>
+                <Text size={12}>{type.name}</Text>
               </Type>
             ))}
           </Types>
 
-          <PokemonGenera>{pokemon.genera}</PokemonGenera>
+          <Text size={12}>{pokemon.genera}</Text>
         </Row>
       </Header>
 

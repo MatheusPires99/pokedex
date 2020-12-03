@@ -1,18 +1,15 @@
 import React, { useMemo } from 'react';
+import { useTheme } from 'styled-components';
 
 import TabWrapper from '../../../../components/TabWrapper';
+import Text from '../../../../components/Text';
 import usePokemon from '../../../../hooks/pokemon';
 import { convertValues } from '../../../../utils';
 
-import {
-  PokemonDescription,
-  PokemonProportionsContainer,
-  PokemonProportions,
-  ProportionsTitle,
-  ProportionsNumber,
-} from './styles';
+import { PokemonProportionsContainer, PokemonProportions } from './styles';
 
 const About = () => {
+  const { colors } = useTheme();
   const { pokemon } = usePokemon();
 
   const pokemonFormatted = useMemo(() => {
@@ -27,25 +24,31 @@ const About = () => {
 
   return (
     <TabWrapper>
-      <PokemonDescription>{pokemon.description}</PokemonDescription>
+      <Text color={colors.black} fontWeight="medium" style={{ lineHeight: 22 }}>
+        {pokemon.description}
+      </Text>
 
       <PokemonProportionsContainer>
         <PokemonProportions>
-          <ProportionsTitle>Height</ProportionsTitle>
+          <Text color={colors.grey} style={{ marginBottom: 8 }}>
+            Height
+          </Text>
 
-          <ProportionsNumber>
+          <Text color={colors.black} fontWeight="bold">
             {pokemonFormatted.heightInMeters} m ({pokemonFormatted.heightInFeet}
             ft)
-          </ProportionsNumber>
+          </Text>
         </PokemonProportions>
 
         <PokemonProportions>
-          <ProportionsTitle>Weight</ProportionsTitle>
+          <Text color={colors.grey} style={{ marginBottom: 8 }}>
+            Height
+          </Text>
 
-          <ProportionsNumber>
+          <Text size={14} color={colors.black} fontWeight="bold">
             {pokemonFormatted.weightInKilograms} kg (
             {pokemonFormatted.weightInPounds} lbs)
-          </ProportionsNumber>
+          </Text>
         </PokemonProportions>
       </PokemonProportionsContainer>
     </TabWrapper>

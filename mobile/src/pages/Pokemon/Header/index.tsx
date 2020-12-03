@@ -5,14 +5,9 @@ import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { Pokemon } from '../../../types';
+import Text from '../../../components/Text';
 
-import {
-  Container,
-  HeaderContent,
-  GoBackButton,
-  PokemonName,
-  PokedexNumber,
-} from './styles';
+import { Container, HeaderContent, GoBackButton } from './styles';
 
 type HeaderProps = {
   translateY: Animated.Value;
@@ -42,11 +37,15 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
           <Icon name="arrow-left" color={colors.white} size={24} />
         </GoBackButton>
 
-        <PokemonName style={textStyle}>{pokemon.name}</PokemonName>
+        <Animated.View style={textStyle}>
+          <Text size={18} fontWeight="bold">
+            {pokemon.name}
+          </Text>
+        </Animated.View>
 
-        <PokedexNumber style={textStyle}>
-          #{pokemon.pokedex_number}
-        </PokedexNumber>
+        <Animated.View style={textStyle}>
+          <Text fontWeight="bold">#{pokemon.pokedex_number}</Text>
+        </Animated.View>
       </HeaderContent>
     </Container>
   );

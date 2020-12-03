@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import api from '../../services/api';
 import { ApiListResult } from '../../types';
+import Text from '../../components/Text';
 
 import PokemonCard from './PokemonCard';
-import {
-  Container,
-  Header,
-  HeaderContent,
-  PokemonsList,
-  Title,
-} from './styles';
+import { Container, Header, HeaderContent, PokemonsList } from './styles';
 
 const Home = () => {
+  const { colors } = useTheme();
+
   const [pokemons, setPokemons] = useState({} as ApiListResult);
   const [loading, setLoading] = useState(true);
 
@@ -29,14 +26,16 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <Text>Carregando...</Text>;
+    return <Text color={colors.black}>Carregando...</Text>;
   }
 
   return (
     <Container>
       <Header>
         <HeaderContent>
-          <Title>Pokedex</Title>
+          <Text color={colors.black} size={32} fontWeight="bold">
+            Pokedex
+          </Text>
         </HeaderContent>
       </Header>
 

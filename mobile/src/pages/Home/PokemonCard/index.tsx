@@ -2,19 +2,13 @@ import React, { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { View } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
+import Text from '../../../components/Text';
 
-import {
-  Container,
-  PokemonName,
-  PokedexNumber,
-  PokemonImage,
-  Types,
-  Type,
-  TypeText,
-} from './styles';
+import { Container, PokedexNumber, PokemonImage, Types, Type } from './styles';
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -28,6 +22,7 @@ const PokemonCard = ({
   rightItem,
 }: PokemonCardProps) => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
 
   const handleNavigateToPokemon = useCallback(() => {
     navigation.navigate('Pokemon', {
@@ -51,11 +46,13 @@ const PokemonCard = ({
     >
       <View style={{ alignItems: 'flex-start' }}>
         <SharedElement id={`pokemon.${pokemon.id}.name`}>
-          <PokemonName>{pokemon.name}</PokemonName>
+          <Text fontWeight="bold">{pokemon.name}</Text>
         </SharedElement>
       </View>
 
-      <PokedexNumber>#{pokemon.pokedex_number}</PokedexNumber>
+      <PokedexNumber size={10} color={`${colors.black}30`}>
+        #{pokemon.pokedex_number}
+      </PokedexNumber>
 
       <SharedElement
         id={`pokemon.${pokemon.id}.image`}
@@ -67,7 +64,7 @@ const PokemonCard = ({
       <Types>
         {pokemon.types.map(type => (
           <Type key={type.url}>
-            <TypeText>{type.name}</TypeText>
+            <Text size={8}>{type.name}</Text>
           </Type>
         ))}
       </Types>
