@@ -49,6 +49,13 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
           extrapolate: 'clamp',
         }),
       },
+      {
+        scale: translateY.interpolate({
+          inputRange: [-100, 1, 200],
+          outputRange: [0.9, 1, 1.1],
+          extrapolate: 'clamp',
+        }),
+      },
     ],
   };
 
