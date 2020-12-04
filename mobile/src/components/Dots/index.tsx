@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 
 import { Container, Dot } from './styles';
 
-const Dots: React.FC = () => {
+const Dots = () => {
   const [dots] = useState(Array.from(Array(15).keys()));
 
   return (

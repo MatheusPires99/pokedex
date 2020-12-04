@@ -80,14 +80,14 @@ const Pokemon = () => {
     <>
       <StatusBar style="light" backgroundColor="transparent" translucent />
 
-      <Block />
-      <Dots />
-
       <Container
         style={{
           backgroundColor,
         }}
       >
+        <Block />
+        <Dots />
+
         <Content>
           <Header pokemon={pokemon} translateY={translateY} />
 
