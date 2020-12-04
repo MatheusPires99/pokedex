@@ -20,7 +20,7 @@ export default class PokemonController {
     const apiResponse = await pokeApi.get<PokemonApiResult>('/pokemon', {
       params: {
         offset: offset || 0,
-        limit: limit || 24,
+        limit: limit || 18,
       },
     });
 
