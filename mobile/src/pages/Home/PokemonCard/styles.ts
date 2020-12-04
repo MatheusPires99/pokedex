@@ -8,9 +8,11 @@ type ContainerProps = {
   rightItem: boolean;
 };
 
-export const Container = styled(RectButton)<ContainerProps>`
+export const Container = styled.View`
   flex: 1;
+`;
 
+export const Button = styled(RectButton)<ContainerProps>`
   position: relative;
   height: 110px;
   margin: 10px;

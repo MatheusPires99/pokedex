@@ -8,7 +8,14 @@ import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
 import Text from '../../../components/Text';
 
-import { Container, PokedexNumber, PokemonImage, Types, Type } from './styles';
+import {
+  Container,
+  Button,
+  PokedexNumber,
+  PokemonImage,
+  Types,
+  Type,
+} from './styles';
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -36,38 +43,40 @@ const PokemonCard = ({
   );
 
   return (
-    <Container
-      afterThirdCard={afterThirdCard}
-      rightItem={rightItem}
-      style={{
-        backgroundColor,
-      }}
-      onPress={handleNavigateToPokemon}
-    >
-      <View style={{ alignItems: 'flex-start' }}>
-        <SharedElement id={`pokemon.${pokemon.id}.name`}>
-          <Text fontWeight="bold">{pokemon.name}</Text>
-        </SharedElement>
-      </View>
-
-      <PokedexNumber size={10} color={`${colors.black}30`}>
-        #{pokemon.pokedex_number}
-      </PokedexNumber>
-
-      <SharedElement
-        id={`pokemon.${pokemon.id}.image`}
-        style={{ position: 'absolute', bottom: 8, right: 8 }}
+    <Container>
+      <Button
+        afterThirdCard={afterThirdCard}
+        rightItem={rightItem}
+        style={{
+          backgroundColor,
+        }}
+        onPress={handleNavigateToPokemon}
       >
-        <PokemonImage source={{ uri: pokemon.image }} />
-      </SharedElement>
+        <View style={{ alignItems: 'flex-start' }}>
+          <SharedElement id={`pokemon.${pokemon.id}.name`}>
+            <Text fontWeight="bold">{pokemon.name}</Text>
+          </SharedElement>
+        </View>
 
-      <Types>
-        {pokemon.types.map(type => (
-          <Type key={type.url}>
-            <Text size={8}>{type.name}</Text>
-          </Type>
-        ))}
-      </Types>
+        <PokedexNumber size={10} color={`${colors.black}30`}>
+          #{pokemon.pokedex_number}
+        </PokedexNumber>
+
+        <SharedElement
+          id={`pokemon.${pokemon.id}.image`}
+          style={{ position: 'absolute', bottom: 8, right: 8 }}
+        >
+          <PokemonImage source={{ uri: pokemon.image }} />
+        </SharedElement>
+
+        <Types>
+          {pokemon.types.map(type => (
+            <Type key={type.url}>
+              <Text size={8}>{type.name}</Text>
+            </Type>
+          ))}
+        </Types>
+      </Button>
     </Container>
   );
 };
