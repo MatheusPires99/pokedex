@@ -38,13 +38,15 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
         </GoBackButton>
 
         <Animated.View style={textStyle}>
-          <Text size={18} fontWeight="bold">
+          <Text variant="body1" color="white" bold>
             {pokemon.name}
           </Text>
         </Animated.View>
 
         <Animated.View style={textStyle}>
-          <Text fontWeight="bold">#{pokemon.pokedex_number}</Text>
+          <Text color="white" bold>
+            #{pokemon.pokedex_number}
+          </Text>
         </Animated.View>
       </HeaderContent>
     </Container>

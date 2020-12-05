@@ -60,8 +60,8 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
             options={{
               tabBarLabel: ({ focused }) => (
                 <Text
-                  color={focused ? colors.black : colors.grey}
-                  fontWeight={focused ? 'bold' : 'semiBold'}
+                  color={focused ? 'black' : 'grey'}
+                  bold={!!focused}
                   numberOfLines={1}
                   adjustsFontSizeToFit
                 >

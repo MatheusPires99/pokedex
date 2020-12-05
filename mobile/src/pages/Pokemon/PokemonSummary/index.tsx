@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
+import { useTheme } from 'styled-components';
 
 import Text from '../../../components/Text';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
@@ -22,6 +23,8 @@ type PokemonSummaryProps = {
 };
 
 const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
+  const { colors } = useTheme();
+
   const pokemonSummaryStyle = {
     zIndex: translateY.interpolate({
       inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
@@ -65,13 +68,13 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         <Row>
           <View style={{ alignItems: 'flex-start' }}>
             <SharedElement id={`pokemon.${pokemon.id}.name`}>
-              <Text size={32} fontWeight="bold">
+              <Text variant="title" color="white">
                 {pokemon.name}
               </Text>
             </SharedElement>
           </View>
 
-          <Text size={16} fontWeight="bold">
+          <Text variant="body2" color="white" bold>
             #{pokemon.pokedex_number}
           </Text>
         </Row>
@@ -80,12 +83,14 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
           <Types>
             {pokemon.types.map(type => (
               <Type key={type.url}>
-                <Text size={12}>{type.name}</Text>
+                <Text variant="caption" color="white">
+                  {type.name}
+                </Text>
               </Type>
             ))}
           </Types>
 
-          <Text size={12}>{pokemon.genera}</Text>
+          <Text color="white">{pokemon.genera}</Text>
         </Row>
       </Header>
 

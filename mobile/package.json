@@ -12,7 +12,7 @@
     "postinstall": "expo-yarn-workspaces postinstall"
   },
   "dependencies": {
-    "@expo-google-fonts/montserrat": "^0.1.0",
+    "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^10.0.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/material-top-tabs": "^5.3.10",

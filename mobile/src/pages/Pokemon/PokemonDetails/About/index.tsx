@@ -24,28 +24,26 @@ const About = () => {
 
   return (
     <TabWrapper>
-      <Text color={colors.black} fontWeight="medium" style={{ lineHeight: 22 }}>
-        {pokemon.description}
-      </Text>
+      <Text>{pokemon.description}</Text>
 
       <PokemonProportionsContainer>
         <PokemonProportions>
-          <Text color={colors.grey} style={{ marginBottom: 8 }}>
+          <Text color="grey" bold style={{ marginBottom: 8 }}>
             Height
           </Text>
 
-          <Text color={colors.black} fontWeight="bold">
+          <Text bold>
             {pokemonFormatted.heightInMeters} m ({pokemonFormatted.heightInFeet}
             ft)
           </Text>
         </PokemonProportions>
 
         <PokemonProportions>
-          <Text color={colors.grey} style={{ marginBottom: 8 }}>
+          <Text color="grey" bold style={{ marginBottom: 8 }}>
             Height
           </Text>
 
-          <Text size={14} color={colors.black} fontWeight="bold">
+          <Text bold>
             {pokemonFormatted.weightInKilograms} kg (
             {pokemonFormatted.weightInPounds} lbs)
           </Text>

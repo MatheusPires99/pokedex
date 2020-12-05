@@ -1,26 +1,35 @@
 import React, { PropsWithChildren } from 'react';
 import { TextProps as ReactNativeTextProps } from 'react-native';
 
+import { Theme } from '../../styles/styled';
+import theme from '../../styles/theme';
+
 import { Container } from './styles';
 
 export type TextProps = ReactNativeTextProps & {
-  size?: number;
-  color?: string;
-  fontWeight?: 'regular' | 'medium' | 'semiBold' | 'bold';
+  variant?: keyof Theme['textVariantes'];
+  color?: keyof Theme['colors'];
+  bold?: boolean;
 };
 
 const Text = ({
-  size,
+  variant,
   color,
-  fontWeight,
+  bold,
   children,
   ...rest
 }: PropsWithChildren<TextProps>) => {
   return (
-    <Container size={size} color={color} fontWeight={fontWeight} {...rest}>
+    <Container variant={variant} color={color} bold={bold} {...rest}>
       {children}
     </Container>
   );
+};
+
+Text.defaultProps = {
+  variant: 'body3',
+  color: theme.colors.black,
+  bold: false,
 };
 
 export default Text;

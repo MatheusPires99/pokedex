@@ -59,7 +59,7 @@ const Home = () => {
   if (loadingInitalData) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text color={colors.black}>Carregando...</Text>
+        <Text variant="text2">Carregando...</Text>
       </View>
     );
   }
@@ -67,9 +67,7 @@ const Home = () => {
   return (
     <Container>
       <Header>
-        <Text color={colors.black} size={32} fontWeight="bold">
-          Pokedex
-        </Text>
+        <Text variant="title">Pokedex</Text>
       </Header>
 
       <PokemonsList

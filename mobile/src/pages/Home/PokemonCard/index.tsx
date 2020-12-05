@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { View } from 'react-native';
-import { useTheme } from 'styled-components';
 
 import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
@@ -29,7 +28,6 @@ const PokemonCard = ({
   rightItem,
 }: PokemonCardProps) => {
   const navigation = useNavigation();
-  const { colors } = useTheme();
 
   const handleNavigateToPokemon = useCallback(() => {
     navigation.navigate('Pokemon', {
@@ -54,11 +52,13 @@ const PokemonCard = ({
       >
         <View style={{ alignItems: 'flex-start' }}>
           <SharedElement id={`pokemon.${pokemon.id}.name`}>
-            <Text fontWeight="bold">{pokemon.name}</Text>
+            <Text color="white" bold>
+              {pokemon.name}
+            </Text>
           </SharedElement>
         </View>
 
-        <PokedexNumber size={10} color={`${colors.black}30`}>
+        <PokedexNumber style={{ fontSize: 10 }}>
           #{pokemon.pokedex_number}
         </PokedexNumber>
 
@@ -72,7 +72,9 @@ const PokemonCard = ({
         <Types>
           {pokemon.types.map(type => (
             <Type key={type.url}>
-              <Text size={8}>{type.name}</Text>
+              <Text color="white" style={{ fontSize: 8, lineHeight: 0 }}>
+                {type.name}
+              </Text>
             </Type>
           ))}
         </Types>

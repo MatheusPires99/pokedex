@@ -3,12 +3,10 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {
-  Montserrat_400Regular,
-  Montserrat_500Medium,
-  Montserrat_600SemiBold,
-  Montserrat_700Bold,
+  Inter_500Medium,
+  Inter_700Bold,
   useFonts,
-} from '@expo-google-fonts/montserrat';
+} from '@expo-google-fonts/inter';
 import { AppLoading } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
@@ -19,10 +17,8 @@ import AppProvider from './src/hooks';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-    Montserrat_500Medium,
-    Montserrat_600SemiBold,
-    Montserrat_700Bold,
+    Inter_500Medium,
+    Inter_700Bold,
   });
 
   if (!fontsLoaded) {

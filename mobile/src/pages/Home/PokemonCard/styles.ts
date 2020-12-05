@@ -39,6 +39,8 @@ export const PokemonImage = styled.Image`
 `;
 
 export const PokedexNumber = styled(Text)`
+  color: ${({ theme }) => `${theme.colors.black}30`};
+
   position: absolute;
   right: 10px;
   top: 10px;
