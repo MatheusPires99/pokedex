@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useTheme } from 'styled-components';
 
 import TabWrapper from '../../../../components/TabWrapper';
 import Text from '../../../../components/Text';
@@ -9,7 +8,6 @@ import { convertValues } from '../../../../utils';
 import { PokemonProportionsContainer, PokemonProportions } from './styles';
 
 const About = () => {
-  const { colors } = useTheme();
   const { pokemon } = usePokemon();
 
   const pokemonFormatted = useMemo(() => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { useTheme } from 'styled-components';
 
 import Text from '../../../components/Text';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
@@ -23,8 +22,6 @@ type PokemonSummaryProps = {
 };
 
 const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
-  const { colors } = useTheme();
-
   const pokemonSummaryStyle = {
     zIndex: translateY.interpolate({
       inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
