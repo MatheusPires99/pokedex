@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { View } from 'react-native';
+import { Animated, View } from 'react-native';
 
 import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
@@ -20,12 +20,18 @@ type PokemonCardProps = {
   pokemon: Pokemon;
   afterThirdCard: boolean;
   rightItem: boolean;
+  index: number;
+  opacity: Animated.Value;
+  translateY: Animated.Value;
 };
 
 const PokemonCard = ({
   pokemon,
   afterThirdCard,
   rightItem,
+  index,
+  opacity,
+  translateY,
 }: PokemonCardProps) => {
   const navigation = useNavigation();
 
@@ -40,8 +46,25 @@ const PokemonCard = ({
     [pokemon.types],
   );
 
+  const containerStyle = {
+    opacity: opacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+    transform: [
+      {
+        translateY: translateY.interpolate({
+          inputRange: [0, 70],
+          outputRange: [0, 70 * (index + 1)],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
+
   return (
-    <Container>
+    <Container style={containerStyle}>
       <Button
         afterThirdCard={afterThirdCard}
         rightItem={rightItem}

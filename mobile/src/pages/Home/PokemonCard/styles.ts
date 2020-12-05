@@ -1,18 +1,19 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { Animated } from 'react-native';
 
 import Text from '../../../components/Text';
 
-type ContainerProps = {
+type ButtonProps = {
   afterThirdCard: boolean;
   rightItem: boolean;
 };
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   flex: 1;
 `;
 
-export const Button = styled(RectButton)<ContainerProps>`
+export const Button = styled(RectButton)<ButtonProps>`
   position: relative;
   height: 110px;
   margin: 10px;
