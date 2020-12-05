@@ -1,5 +1,5 @@
-import React from 'react';
-import { Animated, View } from 'react-native';
+import React, { useEffect, useMemo } from 'react';
+import { Animated, Easing, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
 import Text from '../../../components/Text';
@@ -22,6 +22,50 @@ type PokemonSummaryProps = {
 };
 
 const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
+  const translateXNumber = useMemo(() => new Animated.Value(100), []);
+  const translateXGenera = useMemo(() => new Animated.Value(200), []);
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(translateXNumber, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+
+      Animated.timing(translateXGenera, {
+        toValue: 0,
+        duration: 350,
+        useNativeDriver: true,
+        easing: Easing.inOut(Easing.quad),
+      }),
+    ]).start();
+  }, [translateXNumber, translateXGenera]);
+
+  const pokedexNumberStyle = {
+    transform: [
+      {
+        translateX: translateXNumber.interpolate({
+          inputRange: [0, 100],
+          outputRange: [0, 100],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
+
+  const generaStyle = {
+    transform: [
+      {
+        translateX: translateXGenera.interpolate({
+          inputRange: [0, 200],
+          outputRange: [0, 200],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
+
   const pokemonSummaryStyle = {
     zIndex: translateY.interpolate({
       inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
@@ -71,9 +115,11 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
             </SharedElement>
           </View>
 
-          <Text variant="body2" color="white" bold>
-            #{pokemon.pokedex_number}
-          </Text>
+          <Animated.View style={pokedexNumberStyle}>
+            <Text variant="body2" color="white" bold>
+              #{pokemon.pokedex_number}
+            </Text>
+          </Animated.View>
         </Row>
 
         <Row style={{ marginTop: 16 }}>
@@ -87,7 +133,9 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
             ))}
           </Types>
 
-          <Text color="white">{pokemon.genera}</Text>
+          <Animated.View style={generaStyle}>
+            <Text color="white">{pokemon.genera}</Text>
+          </Animated.View>
         </Row>
       </Header>
 
