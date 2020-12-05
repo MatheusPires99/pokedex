@@ -6,7 +6,6 @@ import Text from '../../../components/Text';
 
 type ButtonProps = {
   afterThirdCard: boolean;
-  rightItem: boolean;
 };
 
 export const Container = styled(Animated.View)`
@@ -25,11 +24,6 @@ export const Button = styled(RectButton)<ButtonProps>`
     props.afterThirdCard &&
     css`
       margin-top: 0px;
-    `}
-
-  ${props =>
-    props.afterThirdCard &&
-    css`
       margin-left: 0px;
     `}
 `;

@@ -19,7 +19,6 @@ import {
 type PokemonCardProps = {
   pokemon: Pokemon;
   afterThirdCard: boolean;
-  rightItem: boolean;
   index: number;
   opacity: Animated.Value;
   translateY: Animated.Value;
@@ -28,7 +27,6 @@ type PokemonCardProps = {
 const PokemonCard = ({
   pokemon,
   afterThirdCard,
-  rightItem,
   index,
   opacity,
   translateY,
@@ -67,7 +65,6 @@ const PokemonCard = ({
     <Container style={containerStyle}>
       <Button
         afterThirdCard={afterThirdCard}
-        rightItem={rightItem}
         style={{
           backgroundColor,
         }}

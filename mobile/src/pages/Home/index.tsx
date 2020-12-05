@@ -100,7 +100,6 @@ const Home = () => {
             <PokemonCard
               pokemon={pokemon}
               afterThirdCard={!!(index + 2)}
-              rightItem={!!(index % 2)}
               index={index}
               opacity={opacity}
               translateY={translateY}
