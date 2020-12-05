@@ -1,20 +1,14 @@
 import React, { useCallback, useMemo } from 'react';
+import { Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { Animated, View } from 'react-native';
 
 import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
 import Text from '../../../components/Text';
+import PokemonTypes from '../../../components/PokemonTypes';
 
-import {
-  Container,
-  Button,
-  PokedexNumber,
-  PokemonImage,
-  Types,
-  Type,
-} from './styles';
+import { Container, Button, PokedexNumber, PokemonImage } from './styles';
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -53,8 +47,8 @@ const PokemonCard = ({
     transform: [
       {
         translateY: translateY.interpolate({
-          inputRange: [0, 70],
-          outputRange: [0, 70 * (index + 1)],
+          inputRange: [0, 50],
+          outputRange: [0, 50 * (index + 1)],
           extrapolate: 'clamp',
         }),
       },
@@ -70,13 +64,14 @@ const PokemonCard = ({
         }}
         onPress={handleNavigateToPokemon}
       >
-        <View style={{ alignItems: 'flex-start' }}>
-          <SharedElement id={`pokemon.${pokemon.id}.name`}>
-            <Text color="white" bold>
-              {pokemon.name}
-            </Text>
-          </SharedElement>
-        </View>
+        <SharedElement
+          id={`pokemon.${pokemon.id}.name`}
+          style={{ alignItems: 'flex-start' }}
+        >
+          <Text color="white" bold>
+            {pokemon.name}
+          </Text>
+        </SharedElement>
 
         <PokedexNumber style={{ fontSize: 10 }}>
           #{pokemon.pokedex_number}
@@ -89,15 +84,7 @@ const PokemonCard = ({
           <PokemonImage source={{ uri: pokemon.image }} />
         </SharedElement>
 
-        <Types>
-          {pokemon.types.map(type => (
-            <Type key={type.url}>
-              <Text color="white" style={{ fontSize: 8, lineHeight: 0 }}>
-                {type.name}
-              </Text>
-            </Type>
-          ))}
-        </Types>
+        <PokemonTypes pokemon={pokemon} size="small" style={{ marginTop: 8 }} />
       </Button>
     </Container>
   );

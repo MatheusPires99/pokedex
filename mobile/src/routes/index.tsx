@@ -35,17 +35,22 @@ const Routes = () => {
         sharedElementsConfig={(route: Route<string, object | undefined>) => {
           const { pokemon } = route.params as RouteParams;
 
-          return [
+          const sharedArray = [
             {
               id: `pokemon.${pokemon.id}.image`,
             },
             {
               id: `pokemon.${pokemon.id}.name`,
             },
-            {
-              id: `pokemon.${pokemon.id}.types`,
-            },
           ];
+
+          pokemon.types.forEach(type => {
+            return sharedArray.push({
+              id: `pokemon.${pokemon.id}.type.${type.url}`,
+            });
+          });
+
+          return sharedArray;
         }}
       />
     </Stack.Navigator>

@@ -18,18 +18,6 @@ export const Row = styled.View`
   justify-content: space-between;
 `;
 
-export const Types = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const Type = styled.View`
-  background: ${({ theme }) => theme.colors.white}30;
-  padding: 6px 28px;
-  border-radius: 16px;
-  margin-right: 8px;
-`;
-
 export const PokemonImageContainer = styled(Animated.View)`
   margin-top: 24px;
 

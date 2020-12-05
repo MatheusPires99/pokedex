@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
+import PokemonTypes from '../../../components/PokemonTypes';
 import Text from '../../../components/Text';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 import { Pokemon } from '../../../types';
@@ -10,8 +11,6 @@ import {
   Container,
   Header,
   Row,
-  Types,
-  Type,
   PokemonImageContainer,
   PokemonImage,
 } from './styles';
@@ -107,13 +106,14 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
     <Container style={pokemonSummaryStyle}>
       <Header>
         <Row>
-          <View style={{ alignItems: 'flex-start' }}>
-            <SharedElement id={`pokemon.${pokemon.id}.name`}>
-              <Text variant="title" color="white">
-                {pokemon.name}
-              </Text>
-            </SharedElement>
-          </View>
+          <SharedElement
+            id={`pokemon.${pokemon.id}.name`}
+            style={{ alignItems: 'flex-start' }}
+          >
+            <Text variant="title" color="white">
+              {pokemon.name}
+            </Text>
+          </SharedElement>
 
           <Animated.View style={pokedexNumberStyle}>
             <Text variant="body2" color="white" bold>
@@ -123,15 +123,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         </Row>
 
         <Row style={{ marginTop: 16 }}>
-          <Types>
-            {pokemon.types.map(type => (
-              <Type key={type.url}>
-                <Text variant="caption" color="white">
-                  {type.name}
-                </Text>
-              </Type>
-            ))}
-          </Types>
+          <PokemonTypes pokemon={pokemon} size="regular" />
 
           <Animated.View style={generaStyle}>
             <Text color="white">{pokemon.genera}</Text>

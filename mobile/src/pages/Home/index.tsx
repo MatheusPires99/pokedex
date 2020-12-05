@@ -18,7 +18,7 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const opacity = useMemo(() => new Animated.Value(0), []);
-  const translateY = useMemo(() => new Animated.Value(70), []);
+  const translateY = useMemo(() => new Animated.Value(50), []);
 
   const loadPokemons = useCallback(
     async (offsetValue = offset, shouldRefresh = false) => {

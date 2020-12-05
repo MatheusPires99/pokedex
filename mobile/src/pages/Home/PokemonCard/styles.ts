@@ -40,16 +40,3 @@ export const PokedexNumber = styled(Text)`
   right: 10px;
   top: 10px;
 `;
-
-export const Types = styled.View`
-  margin-top: 8px;
-
-  align-items: flex-start;
-`;
-
-export const Type = styled.View`
-  background: ${({ theme }) => theme.colors.white}30;
-  padding: 4px 12px;
-  border-radius: 16px;
-  margin-top: 4px;
-`;
