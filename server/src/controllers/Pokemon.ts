@@ -159,6 +159,7 @@ export default class PokemonController {
         weight: pokemonData.weight,
         abilites: pokemonAbilityFormatted,
         evolution: evolutionFormatted,
+        gender_rate: pokemonSpecieData.gender_rate,
         egg_groups: eggGroupsFormatted,
       };
     });
