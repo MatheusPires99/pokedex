@@ -13,7 +13,6 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from './src/styles/theme';
 import Routes from './src/routes';
-import AppProvider from './src/hooks';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -30,9 +29,7 @@ const App = () => {
       <StatusBar style="dark" backgroundColor="#FFF" translucent />
 
       <ThemeProvider theme={theme}>
-        <AppProvider>
-          <Routes />
-        </AppProvider>
+        <Routes />
       </ThemeProvider>
     </NavigationContainer>
   );
