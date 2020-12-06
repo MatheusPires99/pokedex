@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Animated } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useTheme } from 'styled-components';
 
-import usePokemon from '../../../hooks/pokemon';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
@@ -20,10 +19,6 @@ type PokemonDetailsProps = {
 
 const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
   const { colors } = useTheme();
-
-  const { setPokemon } = usePokemon();
-
-  useEffect(() => setPokemon(pokemon), [pokemon, setPokemon]);
 
   const containerStyle = {
     transform: [
@@ -44,33 +39,32 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
         tabBarOptions={{
           indicatorStyle: {
             backgroundColor: colors.blue,
-            height: 2,
-          },
-          style: {
-            borderTopLeftRadius: 32,
-            borderTopRightRadius: 32,
           },
         }}
       >
-        {tabs.map((tab, index) => (
-          <Tab.Screen
-            key={index}
-            name={tab.name}
-            component={tab.component}
-            options={{
-              tabBarLabel: ({ focused }) => (
-                <Text
-                  color={focused ? 'black' : 'grey'}
-                  bold={!!focused}
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                >
-                  {tab.name}
-                </Text>
-              ),
-            }}
-          />
-        ))}
+        {tabs.map((tab, index) => {
+          const { name, component: TabComponent } = tab;
+
+          return (
+            <Tab.Screen
+              key={index}
+              name={name}
+              children={() => <TabComponent pokemon={pokemon} />}
+              options={{
+                tabBarLabel: ({ focused }) => (
+                  <Text
+                    color={focused ? 'black' : 'grey'}
+                    bold={!!focused}
+                    numberOfLines={1}
+                    adjustsFontSizeToFit
+                  >
+                    {name}
+                  </Text>
+                ),
+              }}
+            />
+          );
+        })}
       </Tab.Navigator>
     </Container>
   );

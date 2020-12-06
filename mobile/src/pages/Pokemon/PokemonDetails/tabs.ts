@@ -1,7 +1,13 @@
+import { Pokemon } from '../../../types';
+
 import About from './About';
 import BaseStats from './BaseStats';
 import Evolution from './Evolution';
 import Moves from './Moves';
+
+export type TabProps = {
+  pokemon: Pokemon;
+};
 
 const tabs = [
   {
