@@ -48,6 +48,7 @@ export type Pokemon = {
   weight: number;
   abilites: Ability[];
   evolution?: Evolution[];
+  gender_rate: number;
   egg_groups: EggGroup[];
 };
 
