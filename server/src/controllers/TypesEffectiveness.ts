@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { PokemonApiResult, Type } from '../types';
 import pokeApi from '../services/pokeApi';
+import { capitalizeFirstLetter } from '../utils';
 
 type DemageRelations = {
   multiplier: string;
@@ -23,14 +24,14 @@ export default class TypesEffectiveness {
     typeData.damage_relations.double_damage_from.map(damageType =>
       damage_relations.push({
         multiplier: '2x',
-        type: damageType.name,
+        type: capitalizeFirstLetter(damageType.name),
       }),
     );
 
     typeData.damage_relations.half_damage_from.map(damageType =>
       damage_relations.push({
         multiplier: '0.5x',
-        type: damageType.name,
+        type: capitalizeFirstLetter(damageType.name),
       }),
     );
 
@@ -42,7 +43,7 @@ export default class TypesEffectiveness {
     leftTypes.map(leftType =>
       damage_relations.push({
         multiplier: '1x',
-        type: leftType.name,
+        type: capitalizeFirstLetter(leftType.name),
       }),
     );
 
