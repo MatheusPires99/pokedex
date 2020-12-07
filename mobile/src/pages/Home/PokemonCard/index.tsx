@@ -7,6 +7,7 @@ import { Pokemon } from '../../../types';
 import { getColorByPokemonType } from '../../../utils';
 import Text from '../../../components/Text';
 import PokemonTypes from '../../../components/PokemonTypes';
+import Pokeball from '../../../components/Pokeball';
 
 import { Container, Button, PokedexNumber, PokemonImage } from './styles';
 
@@ -79,10 +80,20 @@ const PokemonCard = ({
 
         <SharedElement
           id={`pokemon.${pokemon.id}.image`}
-          style={{ position: 'absolute', bottom: 8, right: 8 }}
+          style={{ position: 'absolute', bottom: 4, right: 4 }}
         >
-          <PokemonImage source={{ uri: pokemon.image }} />
+          <PokemonImage uri={pokemon.image} />
         </SharedElement>
+
+        <Pokeball
+          width={80}
+          height={80}
+          style={{
+            position: 'absolute',
+            right: -8,
+            bottom: -8,
+          }}
+        />
 
         <PokemonTypes pokemon={pokemon} size="small" style={{ marginTop: 8 }} />
       </Button>

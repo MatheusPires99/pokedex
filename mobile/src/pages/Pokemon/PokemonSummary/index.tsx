@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { Animated, Easing } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
+import Pokeball from '../../../components/Pokeball';
 import PokemonTypes from '../../../components/PokemonTypes';
 import Text from '../../../components/Text';
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
@@ -131,9 +132,15 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         </Row>
       </Header>
 
+      <Pokeball
+        width={250}
+        height={250}
+        style={{ position: 'absolute', bottom: 0, alignSelf: 'center' }}
+      />
+
       <PokemonImageContainer style={pokemonImageContainerStyle}>
         <SharedElement id={`pokemon.${pokemon.id}.image`}>
-          <PokemonImage source={{ uri: pokemon.image }} />
+          <PokemonImage uri={pokemon.image} />
         </SharedElement>
       </PokemonImageContainer>
     </Container>

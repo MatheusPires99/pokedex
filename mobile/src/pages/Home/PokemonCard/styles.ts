@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Animated } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 
 import Text from '../../../components/Text';
 
@@ -14,6 +15,7 @@ export const Container = styled(Animated.View)`
 
 export const Button = styled(RectButton)<ButtonProps>`
   position: relative;
+  overflow: hidden;
   height: 110px;
   margin: 10px;
   padding: 16px;
@@ -28,7 +30,7 @@ export const Button = styled(RectButton)<ButtonProps>`
     `}
 `;
 
-export const PokemonImage = styled.Image`
+export const PokemonImage = styled(Image)`
   width: 72px;
   height: 72px;
 `;

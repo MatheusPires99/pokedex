@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 
@@ -24,7 +25,7 @@ export const PokemonImageContainer = styled(Animated.View)`
   align-items: center;
 `;
 
-export const PokemonImage = styled.Image`
+export const PokemonImage = styled(Image)`
   width: 256px;
   height: 256px;
 `;
