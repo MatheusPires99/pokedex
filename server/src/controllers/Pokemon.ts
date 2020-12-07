@@ -5,12 +5,7 @@ import {
   getPokemonIdByUrl,
   getPokemonImageById,
 } from '../utils';
-import {
-  EvolutionChain,
-  Pokemon,
-  PokemonApiResult,
-  PokemonSpecie,
-} from '../types';
+import { Pokemon, PokemonApiResult, PokemonSpecie } from '../types';
 import pokeApi from '../services/pokeApi';
 
 export default class PokemonController {
@@ -34,14 +29,6 @@ export default class PokemonController {
       );
       const { data: pokemonSpecieData } = await pokeApi.get<PokemonSpecie>(
         `/pokemon-species/${pokemonId}`,
-      );
-
-      const pokemonIdInEvolutionChain = getPokemonIdByUrl(
-        pokemonSpecieData.evolution_chain.url,
-      );
-
-      const { data: evolutionChain } = await pokeApi.get<EvolutionChain>(
-        `/evolution-chain/${pokemonIdInEvolutionChain}`,
       );
 
       const pokemonNameIndex = pokemonSpecieData.names.findIndex(
@@ -103,45 +90,6 @@ export default class PokemonController {
         };
       });
 
-      const evolutionFormatted = evolutionChain.chain.evolves_to.map(
-        evolves => {
-          let second_evolution;
-
-          if (evolves.evolves_to.length !== 0) {
-            evolves.evolves_to.map(secondEvolves => {
-              const secondEvolutionPokemonId = getPokemonIdByUrl(
-                secondEvolves.species.url,
-              );
-
-              second_evolution = {
-                name: capitalizeFirstLetter(secondEvolves.species.name),
-                url: secondEvolves.species.url,
-                min_level: secondEvolves.evolution_details[0].min_level,
-                image: getPokemonImageById(secondEvolutionPokemonId),
-              };
-
-              return second_evolution;
-            });
-          }
-
-          const firstEvolutionPokemonId = getPokemonIdByUrl(
-            evolves.species.url,
-          );
-
-          const first_evolution = {
-            name: capitalizeFirstLetter(evolves.species.name),
-            url: evolves.species.url,
-            min_level: evolves.evolution_details[0].min_level,
-            image: getPokemonImageById(firstEvolutionPokemonId),
-          };
-
-          return {
-            first_evolution,
-            second_evolution,
-          };
-        },
-      );
-
       return {
         id: pokemonData.id,
         name: pokemonSpecieData.names[pokemonNameIndex].name,
@@ -158,7 +106,6 @@ export default class PokemonController {
         height: pokemonData.height,
         weight: pokemonData.weight,
         abilites: pokemonAbilityFormatted,
-        evolution: evolutionFormatted,
         gender_rate: pokemonSpecieData.gender_rate,
         egg_groups: eggGroupsFormatted,
       };
