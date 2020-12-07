@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { Foundation as Icon } from '@expo/vector-icons';
 
 import { TabProps } from '../tabs';
-import TabWrapper from '../../../../components/TabWrapper';
 import Text from '../../../../components/Text';
 import {
   convertValues,
@@ -35,7 +34,7 @@ const About = ({ pokemon }: TabProps) => {
   const pokemonGendersRate = getPokemonGenderStats(pokemon.gender_rate);
 
   return (
-    <TabWrapper>
+    <>
       <Section>
         <Text>{pokemonFormatted.descriptionWithNoBreakLine}</Text>
       </Section>
@@ -108,7 +107,7 @@ const About = ({ pokemon }: TabProps) => {
           <SectionText>{pokemon.base_experience}</SectionText>
         </SectionContent>
       </Section>
-    </TabWrapper>
+    </>
   );
 };
 

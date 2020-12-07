@@ -33,7 +33,7 @@ export const SectionText = styled(Text).attrs({
 export const ShadowContainer = styled.View`
   background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
-  box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
   padding: 24px;
 
   flex-direction: row;
