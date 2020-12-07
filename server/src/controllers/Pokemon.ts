@@ -10,14 +10,8 @@ import {
   Pokemon,
   PokemonApiResult,
   PokemonSpecie,
-  Type,
 } from '../types';
 import pokeApi from '../services/pokeApi';
-
-type DemageRelations = {
-  multiplier: string;
-  type: string;
-}[];
 
 export default class PokemonController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -46,16 +40,8 @@ export default class PokemonController {
         pokemonSpecieData.evolution_chain.url,
       );
 
-      const pokemonType = pokemonData.types[0].type.name;
-
       const { data: evolutionChain } = await pokeApi.get<EvolutionChain>(
         `/evolution-chain/${pokemonIdInEvolutionChain}`,
-      );
-
-      const { data: typesData } = await pokeApi.get<PokemonApiResult>(`/type`);
-
-      const { data: typeData } = await pokeApi.get<Type>(
-        `/type/${pokemonType}`,
       );
 
       const pokemonNameIndex = pokemonSpecieData.names.findIndex(
@@ -156,35 +142,6 @@ export default class PokemonController {
         },
       );
 
-      const allTypes = typesData.results;
-
-      const damage_relations: DemageRelations = [];
-
-      typeData.damage_relations.double_damage_from.map(type =>
-        damage_relations.push({
-          multiplier: '2x',
-          type: type.name,
-        }),
-      );
-
-      typeData.damage_relations.half_damage_from.map(type =>
-        damage_relations.push({
-          multiplier: '0.5x',
-          type: type.name,
-        }),
-      );
-
-      const leftTypes = allTypes.filter(
-        ({ name }) => !damage_relations.some(({ type }) => type === name),
-      );
-
-      leftTypes.map(type =>
-        damage_relations.push({
-          multiplier: '1x',
-          type: type.name,
-        }),
-      );
-
       return {
         id: pokemonData.id,
         name: pokemonSpecieData.names[pokemonNameIndex].name,
@@ -204,7 +161,6 @@ export default class PokemonController {
         evolution: evolutionFormatted,
         gender_rate: pokemonSpecieData.gender_rate,
         egg_groups: eggGroupsFormatted,
-        damage_relations,
       };
     });
 
