@@ -14,21 +14,6 @@ export type Ability = {
   url: string;
 };
 
-export type Evolution = {
-  first_evolution?: {
-    name: string;
-    url: string;
-    min_level: number;
-    image: string;
-  };
-  second_evolution?: {
-    name: string;
-    url: string;
-    min_level: number;
-    image: string;
-  };
-};
-
 export type EggGroup = {
   name: string;
   url: string;
@@ -47,7 +32,6 @@ export type Pokemon = {
   height: number;
   weight: number;
   abilites: Ability[];
-  evolution?: Evolution[];
   gender_rate: number;
   egg_groups: EggGroup[];
 };
