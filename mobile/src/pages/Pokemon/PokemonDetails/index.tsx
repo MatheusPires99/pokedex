@@ -8,7 +8,7 @@ import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
 
 import tabs from './tabs';
-import { Container } from './styles';
+import { Container, TabWrapper } from './styles';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -40,6 +40,9 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
           indicatorStyle: {
             backgroundColor: colors.blue,
           },
+          style: {
+            marginHorizontal: 24,
+          },
         }}
       >
         {tabs.map((tab, index) => {
@@ -49,7 +52,11 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
             <Tab.Screen
               key={index}
               name={name}
-              children={() => <TabComponent pokemon={pokemon} />}
+              children={() => (
+                <TabWrapper>
+                  <TabComponent pokemon={pokemon} />
+                </TabWrapper>
+              )}
               options={{
                 tabBarLabel: ({ focused }) => (
                   <Text

@@ -12,7 +12,7 @@ export const Container = styled(Animated.View)`
   background: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
-  padding: 16px 24px 0;
+  padding: 16px 0;
 
   height: ${height - (Constants.statusBarHeight + HEADER_HEIGHT)}px;
 
@@ -20,4 +20,11 @@ export const Container = styled(Animated.View)`
   top: 0;
   right: 0;
   left: 0;
+`;
+
+export const TabWrapper = styled.View`
+  flex: 1;
+  width: 100%;
+  background: ${({ theme }) => theme.colors.white};
+  padding: 32px 24px;
 `;
