@@ -56,7 +56,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
       Animated.timing(pokeballOpacity, {
         toValue: 1,
         duration: 350,
-        delay: 250,
+        delay: 200,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.quad),
       }),
@@ -144,34 +144,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   };
 
   return (
-    <Container style={pokemonSummaryStyle}>
-      <Header>
-        <Row>
-          <SharedElement
-            id={`pokemon.${pokemon.id}.name`}
-            style={{ alignItems: 'flex-start' }}
-          >
-            <Text variant="title" color="white">
-              {pokemon.name}
-            </Text>
-          </SharedElement>
-
-          <Animated.View style={pokedexNumberStyle}>
-            <Text variant="body2" color="white" bold>
-              #{pokemon.pokedex_number}
-            </Text>
-          </Animated.View>
-        </Row>
-
-        <Row style={{ marginTop: 16 }}>
-          <PokemonTypes pokemon={pokemon} size="regular" />
-
-          <Animated.View style={generaStyle}>
-            <Text color="white">{pokemon.genera}</Text>
-          </Animated.View>
-        </Row>
-      </Header>
-
+    <>
       <Pokeball
         width={250}
         height={250}
@@ -185,12 +158,41 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         ]}
       />
 
-      <PokemonImageContainer style={pokemonImageContainerStyle}>
-        <SharedElement id={`pokemon.${pokemon.id}.image`}>
-          <PokemonImage uri={pokemon.image} />
-        </SharedElement>
-      </PokemonImageContainer>
-    </Container>
+      <Container style={pokemonSummaryStyle}>
+        <Header>
+          <Row>
+            <SharedElement
+              id={`pokemon.${pokemon.id}.name`}
+              style={{ alignItems: 'flex-start' }}
+            >
+              <Text variant="title" color="white">
+                {pokemon.name}
+              </Text>
+            </SharedElement>
+
+            <Animated.View style={pokedexNumberStyle}>
+              <Text variant="body2" color="white" bold>
+                #{pokemon.pokedex_number}
+              </Text>
+            </Animated.View>
+          </Row>
+
+          <Row style={{ marginTop: 16 }}>
+            <PokemonTypes pokemon={pokemon} size="regular" />
+
+            <Animated.View style={generaStyle}>
+              <Text color="white">{pokemon.genera}</Text>
+            </Animated.View>
+          </Row>
+        </Header>
+
+        <PokemonImageContainer style={pokemonImageContainerStyle}>
+          <SharedElement id={`pokemon.${pokemon.id}.image`}>
+            <PokemonImage uri={pokemon.image} />
+          </SharedElement>
+        </PokemonImageContainer>
+      </Container>
+    </>
   );
 };
 
