@@ -5,8 +5,8 @@ const getPokemonGenderStats = (gender_rate: number) => {
   const malePercentage = 100 - femalePercentage;
 
   return [
-    { gender: 'female', rate: femalePercentage },
     { gender: 'male', rate: malePercentage },
+    { gender: 'female', rate: femalePercentage },
   ];
 };
 
