@@ -37,8 +37,12 @@ export default class TypesEffectiveness {
 
     const leftTypes = allTypes.filter(
       ({ name }) =>
-        !damage_relations.some(({ type: typeName }) => typeName === name),
+        !damage_relations.some(
+          ({ type: TypeName }) => TypeName.toLocaleLowerCase() === name,
+        ),
     );
+
+    leftTypes.splice(leftTypes.length - 2);
 
     leftTypes.map(leftType =>
       damage_relations.push({
