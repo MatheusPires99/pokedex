@@ -7,7 +7,7 @@ export const Container = styled.View`
   border-radius: 24px;
 
   position: absolute;
-  top: -90px;
+  top: -95px;
   left: -110px;
   transform: rotate(-12deg);
 `;
