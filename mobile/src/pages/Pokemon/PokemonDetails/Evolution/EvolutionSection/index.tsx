@@ -4,7 +4,13 @@ import { useTheme } from 'styled-components';
 
 import Text from '../../../../../components/Text';
 
-import { Container, Pokemon, PokemonImage, MinLevel } from './styles';
+import {
+  Container,
+  Pokemon,
+  PokeballBackground,
+  PokemonImage,
+  MinLevel,
+} from './styles';
 
 type EvolutionSectionProps = {
   firstImage: string;
@@ -26,6 +32,8 @@ const EvolutionSection = ({
   return (
     <Container>
       <Pokemon>
+        <PokeballBackground />
+
         <PokemonImage source={{ uri: firstImage }} />
         <Text>{firstName}</Text>
       </Pokemon>
@@ -38,6 +46,8 @@ const EvolutionSection = ({
       </MinLevel>
 
       <Pokemon>
+        <PokeballBackground />
+
         <PokemonImage source={{ uri: secondImage }} />
         <Text>{secondName}</Text>
       </Pokemon>
