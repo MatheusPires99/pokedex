@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Animated, Easing } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
@@ -24,6 +24,18 @@ type PokemonSummaryProps = {
 const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   const translateXNumber = useMemo(() => new Animated.Value(100), []);
   const translateXGenera = useMemo(() => new Animated.Value(200), []);
+  const rotate = useMemo(() => new Animated.Value(0), []);
+
+  const rotatePokeball = useCallback(() => {
+    Animated.loop(
+      Animated.timing(rotate, {
+        toValue: 360,
+        duration: 4500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ).start();
+  }, [rotate]);
 
   useEffect(() => {
     Animated.parallel([
@@ -40,7 +52,9 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         easing: Easing.inOut(Easing.quad),
       }),
     ]).start();
-  }, [translateXNumber, translateXGenera]);
+
+    rotatePokeball();
+  }, [translateXNumber, translateXGenera, rotatePokeball]);
 
   const pokedexNumberStyle = {
     transform: [
@@ -103,6 +117,18 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
     ],
   };
 
+  const pokeballStyle = {
+    transform: [
+      {
+        rotate: rotate.interpolate({
+          inputRange: [0, 360],
+          outputRange: ['0deg', '360deg'],
+          extrapolate: 'clamp',
+        }),
+      },
+    ],
+  };
+
   return (
     <Container style={pokemonSummaryStyle}>
       <Header>
@@ -135,7 +161,14 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
       <Pokeball
         width={250}
         height={250}
-        style={{ position: 'absolute', bottom: 0, alignSelf: 'center' }}
+        style={[
+          {
+            position: 'absolute',
+            bottom: 0,
+            alignSelf: 'center',
+          },
+          pokeballStyle,
+        ]}
       />
 
       <PokemonImageContainer style={pokemonImageContainerStyle}>
