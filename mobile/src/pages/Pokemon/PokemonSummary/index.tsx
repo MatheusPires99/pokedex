@@ -24,6 +24,7 @@ type PokemonSummaryProps = {
 const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   const translateXNumber = useMemo(() => new Animated.Value(100), []);
   const translateXGenera = useMemo(() => new Animated.Value(200), []);
+  const pokeballOpacity = useMemo(() => new Animated.Value(0), []);
   const rotate = useMemo(() => new Animated.Value(0), []);
 
   const rotatePokeball = useCallback(() => {
@@ -51,10 +52,18 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         useNativeDriver: true,
         easing: Easing.inOut(Easing.quad),
       }),
+
+      Animated.timing(pokeballOpacity, {
+        toValue: 1,
+        duration: 350,
+        delay: 250,
+        useNativeDriver: true,
+        easing: Easing.inOut(Easing.quad),
+      }),
     ]).start();
 
     rotatePokeball();
-  }, [translateXNumber, translateXGenera, rotatePokeball]);
+  }, [translateXNumber, translateXGenera, pokeballOpacity, rotatePokeball]);
 
   const pokedexNumberStyle = {
     transform: [
@@ -118,6 +127,11 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   };
 
   const pokeballStyle = {
+    opacity: pokeballOpacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
     transform: [
       {
         rotate: rotate.interpolate({
