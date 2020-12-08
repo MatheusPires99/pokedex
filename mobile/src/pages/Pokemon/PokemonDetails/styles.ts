@@ -24,7 +24,6 @@ export const Container = styled(Animated.View)`
 
 export const TabWrapper = styled.View`
   flex: 1;
-  width: 100%;
   background: ${({ theme }) => theme.colors.white};
   padding: 32px 24px;
 `;

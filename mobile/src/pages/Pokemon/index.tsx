@@ -43,14 +43,19 @@ const Pokemon = () => {
 
   const onHandlerStateChanged = (event: PanGestureHandlerStateChangeEvent) => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
+      let opened = false;
+
       const { translationY } = event.nativeEvent;
 
-      if (translationY >= -100) {
+      if (translationY < -100) {
+        opened = true;
+      } else {
+        opened = false;
         translateY.flattenOffset();
       }
 
       Animated.timing(translateY, {
-        toValue: translationY < -100 ? -POKEMON_SUMMARY_HEIGHT : 0,
+        toValue: opened ? -POKEMON_SUMMARY_HEIGHT : 0,
         duration: 200,
         useNativeDriver: true,
       }).start(() => {
