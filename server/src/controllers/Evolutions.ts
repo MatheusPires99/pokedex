@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import pokeApi from '../services/pokeApi';
-import { EvolutionChain, Pokemon, PokemonSpecie } from '../types';
+import { EvolutionChain, PokemonSpecie } from '../types';
 import {
   capitalizeFirstLetter,
   getPokemonIdByUrl,
@@ -20,20 +20,22 @@ export default class EvolutionController {
       pokemonSpecieData.evolution_chain.url,
     );
 
-    const { data: pokemonData } = await pokeApi.get<Pokemon>(
-      `/pokemon/${pokemonIdInEvolutionChain}`,
-    );
-
     const { data: evolutionChain } = await pokeApi.get<EvolutionChain>(
       `/evolution-chain/${pokemonIdInEvolutionChain}`,
     );
 
-    const base_form = {
-      name: pokemonData.name,
-      image: getPokemonImageById(String(pokemonData.id)),
-    };
-
     const evolutionFormatted = evolutionChain.chain.evolves_to.map(evolves => {
+      const {
+        name: baseFormName,
+        url: baseFormUrl,
+      } = evolutionChain.chain.species;
+
+      const base_form = {
+        name: capitalizeFirstLetter(baseFormName),
+        url: evolutionChain.chain.species.url,
+        image: getPokemonImageById(getPokemonIdByUrl(baseFormUrl)),
+      };
+
       let second_evolution;
 
       if (evolves.evolves_to.length !== 0) {
