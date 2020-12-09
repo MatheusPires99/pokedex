@@ -4,12 +4,12 @@ import { ActivityIndicator } from 'react-native';
 import Text from '../../../../components/Text';
 import api from '../../../../services/api';
 import { EvolutionChain } from '../../../../types';
-import { TabProps } from '../tabs';
+import { SlideProps } from '../tabs';
 
 import EvolutionSection from './EvolutionSection';
 import { Content } from './styles';
 
-const Evolution = ({ pokemon }: TabProps) => {
+const Evolution = ({ pokemon }: SlideProps) => {
   const [evolutions, setEvolutions] = useState({} as EvolutionChain);
   const [loading, setLoading] = useState(true);
 

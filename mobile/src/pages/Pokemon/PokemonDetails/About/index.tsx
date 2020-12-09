@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { Foundation as Icon } from '@expo/vector-icons';
 
-import { TabProps } from '../tabs';
+import { SlideProps } from '../tabs';
 import Text from '../../../../components/Text';
 import {
   convertValues,
@@ -19,7 +19,7 @@ import {
   ShadowContainer,
 } from './styles';
 
-const About = ({ pokemon }: TabProps) => {
+const About = ({ pokemon }: SlideProps) => {
   const pokemonFormatted = useMemo(() => {
     return {
       ...pokemon,
