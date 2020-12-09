@@ -60,6 +60,7 @@ const Home = () => {
 
   useEffect(() => {
     loadPokemons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const refreshList = useCallback(async () => {
