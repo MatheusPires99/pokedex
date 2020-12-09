@@ -10,7 +10,7 @@ export const Content = styled.View`
   margin-top: ${Constans.statusBarHeight}px;
 `;
 
-export const PokemonDetailsContainer = styled(Animated.View)`
+export const DetailsContainer = styled(Animated.View)`
   flex: 1;
   position: relative;
 `;

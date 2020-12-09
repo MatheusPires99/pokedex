@@ -15,9 +15,9 @@ import { Pokemon as PokemonType } from '../../types';
 import { getColorByPokemonType } from '../../utils';
 
 import Header from './Header';
-import PokemonSummary from './PokemonSummary';
-import PokemonDetails from './PokemonDetails';
-import { Container, Content, PokemonDetailsContainer } from './styles';
+import Summary from './Summary';
+import Details from './Details';
+import { Container, Content, DetailsContainer } from './styles';
 
 export type RouteParams = {
   pokemon: PokemonType;
@@ -64,7 +64,7 @@ const Pokemon = () => {
     }
   };
 
-  const pokemonDetailsStyle = {
+  const detailsStyle = {
     transform: [
       {
         translateY: translateY.interpolate({
@@ -96,15 +96,15 @@ const Pokemon = () => {
         <Content>
           <Header pokemon={pokemon} translateY={translateY} />
 
-          <PokemonSummary pokemon={pokemon} translateY={translateY} />
+          <Summary pokemon={pokemon} translateY={translateY} />
 
           <PanGestureHandler
             onGestureEvent={animatedEvent}
             onHandlerStateChange={onHandlerStateChanged}
           >
-            <PokemonDetailsContainer style={pokemonDetailsStyle}>
-              <PokemonDetails pokemon={pokemon} translateY={translateY} />
-            </PokemonDetailsContainer>
+            <DetailsContainer style={detailsStyle}>
+              <Details pokemon={pokemon} translateY={translateY} />
+            </DetailsContainer>
           </PanGestureHandler>
         </Content>
       </Container>

@@ -15,14 +15,14 @@ import {
   SlideWrapper,
 } from './styles';
 
-type PokemonDetailsProps = {
+type DetailsProps = {
   translateY: Animated.Value;
   pokemon: Pokemon;
 };
 
 const { width } = Dimensions.get('window');
 
-const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
+const Details = ({ pokemon, translateY }: DetailsProps) => {
   const { colors } = useTheme();
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -122,4 +122,4 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
   );
 };
 
-export default PokemonDetails;
+export default Details;

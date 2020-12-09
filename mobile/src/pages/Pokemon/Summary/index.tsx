@@ -16,12 +16,12 @@ import {
   PokemonImage,
 } from './styles';
 
-type PokemonSummaryProps = {
+type SummaryProps = {
   translateY: Animated.Value;
   pokemon: Pokemon;
 };
 
-const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
+const Summary = ({ pokemon, translateY }: SummaryProps) => {
   const translateXNumber = useMemo(() => new Animated.Value(100), []);
   const translateXGenera = useMemo(() => new Animated.Value(200), []);
   const pokeballOpacity = useMemo(() => new Animated.Value(0), []);
@@ -89,7 +89,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
     ],
   };
 
-  const pokemonSummaryStyle = {
+  const summaryStyle = {
     zIndex: translateY.interpolate({
       inputRange: [-POKEMON_SUMMARY_HEIGHT, 0],
       outputRange: [-1, 2],
@@ -158,7 +158,7 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
         ]}
       />
 
-      <Container style={pokemonSummaryStyle}>
+      <Container style={summaryStyle}>
         <Header>
           <Row>
             <SharedElement
@@ -196,4 +196,4 @@ const PokemonSummary = ({ pokemon, translateY }: PokemonSummaryProps) => {
   );
 };
 
-export default PokemonSummary;
+export default Summary;
