@@ -3,12 +3,12 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Animated } from 'react-native';
 
 import Text from '../../../../components/Text';
-import { TabProps } from '../tabs';
+import { SlideProps } from '../tabs';
 
 import Effectiveness from './Effectiveness';
 import { Stat, StatGraph, StatLine, StatValue } from './styles';
 
-const BaseStats = ({ pokemon }: TabProps) => {
+const BaseStats = ({ pokemon }: SlideProps) => {
   const translateX = useMemo(() => new Animated.Value(-1), []);
 
   useFocusEffect(() =>
