@@ -79,14 +79,12 @@ const Details = ({ pokemon, translateY }: DetailsProps) => {
     <Container style={containerStyle}>
       <Tabs>
         {tabs.map((tab, index) => {
-          const inputRange = [
-            (index - 1) * width,
-            index * width,
-            (index + 1) * width,
-          ];
-
           const color = translateX.interpolate({
-            inputRange,
+            inputRange: [
+              (index - 1) * width,
+              index * width,
+              (index + 1) * width,
+            ],
             outputRange: [colors.grey, colors.black, colors.grey],
             extrapolate: 'clamp',
           });
