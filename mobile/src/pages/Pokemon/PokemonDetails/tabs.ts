@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { Pokemon } from '../../../types';
 
 import About from './About';
@@ -16,4 +18,7 @@ const tabs = [
   { name: 'Moves', slide: Moves },
 ];
 
-export { tabs, SlideProps };
+const { width } = Dimensions.get('window');
+const TAB_BUTTON_WIDTH = (width - 48) / 4;
+
+export { tabs, SlideProps, TAB_BUTTON_WIDTH };
