@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 
 import { HEADER_HEIGHT } from '../../../constants';
 
-import { TAB_BUTTON_WIDTH } from '.';
+import { TAB_BUTTON_WIDTH } from './tabs';
 
 const { height, width } = Dimensions.get('window');
 

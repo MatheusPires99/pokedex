@@ -1,11 +1,12 @@
-import React, { useCallback, useRef, useState, useMemo } from 'react';
+import React, { useCallback, useRef, useMemo } from 'react';
 import { Animated, Dimensions, ScrollView } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import { POKEMON_SUMMARY_HEIGHT } from '../../../constants';
 import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
 
-import { tabs } from './tabs';
+import { tabs, TAB_BUTTON_WIDTH } from './tabs';
 import {
   Container,
   Tabs,
@@ -21,23 +22,19 @@ type PokemonDetailsProps = {
 
 const { width } = Dimensions.get('window');
 
-export const TAB_BUTTON_WIDTH = (width - 48) / 4;
-
 const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
-  const scrollViewRef = useRef<ScrollView>(null);
+  const { colors } = useTheme();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const translateX = useMemo(() => new Animated.Value(0), []);
 
-  const handleChangeTab = useCallback((index: number) => {
+  const handleChangeSlide = useCallback((index: number) => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({
         x: width * index,
         animated: true,
       });
-
-      setCurrentIndex(index);
     }
   }, []);
 
@@ -51,7 +48,7 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
         },
       },
     ],
-    { useNativeDriver: true },
+    { useNativeDriver: false },
   );
 
   const containerStyle = {
@@ -82,11 +79,21 @@ const PokemonDetails = ({ pokemon, translateY }: PokemonDetailsProps) => {
     <Container style={containerStyle}>
       <Tabs>
         {tabs.map((tab, index) => {
-          const isSelected = index === currentIndex;
+          const inputRange = [
+            (index - 1) * width,
+            index * width,
+            (index + 1) * width,
+          ];
+
+          const color = translateX.interpolate({
+            inputRange,
+            outputRange: [colors.grey, colors.black, colors.grey],
+            extrapolate: 'clamp',
+          });
 
           return (
-            <TabButton key={index} onPress={() => handleChangeTab(index)}>
-              <Text color={isSelected ? 'black' : 'grey'} bold={isSelected}>
+            <TabButton key={index} onPress={() => handleChangeSlide(index)}>
+              <Text bold style={{ color }}>
                 {tab.name}
               </Text>
             </TabButton>
