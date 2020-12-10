@@ -7,6 +7,7 @@ import { Pokemon } from '../../types';
 import Text from '../../components/Text';
 
 import PokemonCard from './PokemonCard';
+import FloatingButton from './FloatingButton';
 import { Container, Header, PokemonsList, Loading } from './styles';
 
 const Home = () => {
@@ -108,6 +109,8 @@ const Home = () => {
           );
         }}
       />
+
+      <FloatingButton />
     </Container>
   );
 };

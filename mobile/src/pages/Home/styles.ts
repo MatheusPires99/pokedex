@@ -8,13 +8,13 @@ import { HEADER_HEIGHT } from '../../constants';
 export const Container = styled.View`
   flex: 1;
   padding: 0 24px;
+  position: relative;
 `;
 
 export const Header = styled.View`
   margin-top: ${Constants.statusBarHeight}px;
-
-  height: ${HEADER_HEIGHT}px;
   margin-bottom: 8px;
+  height: ${HEADER_HEIGHT}px;
 
   justify-content: center;
 `;
