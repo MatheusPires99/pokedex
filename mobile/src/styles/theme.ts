@@ -7,6 +7,7 @@ export default {
     red: '#FA6555',
     green: '#41D168',
     blue: '#0055D4',
+    lilac: '#6C79DB',
   },
   fontFamily: {
     medium: 'Inter_500Medium',
