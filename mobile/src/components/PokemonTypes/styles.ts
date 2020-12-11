@@ -35,6 +35,6 @@ export const TypeText = styled(Text).attrs({
     props.size === 'small' &&
     css`
       font-size: 8px;
-      line-height: 0;
+      line-height: 10px;
     `}
 `;
