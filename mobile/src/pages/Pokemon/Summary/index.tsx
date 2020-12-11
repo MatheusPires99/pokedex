@@ -53,10 +53,11 @@ const Summary = ({ pokemon, translateY }: SummaryProps) => {
         easing: Easing.inOut(Easing.quad),
       }),
 
+      Animated.delay(200),
+
       Animated.timing(pokeballOpacity, {
         toValue: 1,
         duration: 350,
-        delay: 200,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.quad),
       }),
