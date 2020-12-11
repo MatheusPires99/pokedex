@@ -4,13 +4,14 @@ import { View, Animated } from 'react-native';
 import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
 import { Pokemon } from '../../types';
+import { useSearch } from '../../hooks/search';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
-import { useSearch } from '../../hooks/search';
 
 import PokemonCard from './PokemonCard';
 import FloatingButton from './FloatingButton';
 import { Container, Header, PokemonsList } from './styles';
+import SearchModal from './SearchModal';
 
 const Home = () => {
   const { isSearching } = useSearch();
@@ -21,6 +22,7 @@ const Home = () => {
   const [loadingInitalData, setLoadingInitialData] = useState(true);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const opacity = useMemo(() => new Animated.Value(0), []);
   const translateY = useMemo(() => new Animated.Value(50), []);
@@ -117,6 +119,8 @@ const Home = () => {
       />
 
       <FloatingButton />
+
+      {isSearching && <SearchModal setSearchValue={setSearchValue} />}
     </Container>
   );
 };
