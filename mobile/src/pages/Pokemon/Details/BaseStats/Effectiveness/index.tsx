@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
 
 import Text from '../../../../../components/Text';
+import Loading from '../../../../../components/Loading';
 import api from '../../../../../services/api';
 import { getColorByPokemonType } from '../../../../../utils';
-import { TabProps } from '../../tabs';
+import { SlideProps } from '../../tabs';
 
 import {
   Container,
@@ -18,7 +18,7 @@ type EffectivenessType = {
   type: string;
 };
 
-const Effectiveness = ({ pokemon }: TabProps) => {
+const Effectiveness = ({ pokemon }: SlideProps) => {
   const [effectiveness, setEffectiveness] = useState<EffectivenessType[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +38,7 @@ const Effectiveness = ({ pokemon }: TabProps) => {
   return (
     <Container>
       {loading ? (
-        <ActivityIndicator />
+        <Loading />
       ) : (
         <>
           <Header>

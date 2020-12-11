@@ -5,12 +5,16 @@ import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
 import { Pokemon } from '../../types';
 import Text from '../../components/Text';
+import Loading from '../../components/Loading';
+import { useSearch } from '../../hooks/search';
 
 import PokemonCard from './PokemonCard';
 import FloatingButton from './FloatingButton';
-import { Container, Header, PokemonsList, Loading } from './styles';
+import { Container, Header, PokemonsList } from './styles';
 
 const Home = () => {
+  const { isSearching } = useSearch();
+
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [offset, setOffset] = useState(0);
   const [counter, setCounter] = useState(1);
@@ -94,7 +98,9 @@ const Home = () => {
         onEndReachedThreshold={0.1}
         onRefresh={refreshList}
         refreshing={refreshing}
-        ListFooterComponent={loading ? <Loading /> : <></>}
+        ListFooterComponent={
+          loading ? <Loading style={{ marginVertical: 8 }} /> : <></>
+        }
         keyExtractor={pokemon => String(pokemon.id)}
         numColumns={2}
         renderItem={({ item: pokemon, index }) => {

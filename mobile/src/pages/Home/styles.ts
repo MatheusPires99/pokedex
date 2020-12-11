@@ -22,9 +22,3 @@ export const Header = styled.View`
 export const PokemonsList = styled(FlatList as new () => FlatList<Pokemon>)`
   flex: 1;
 `;
-
-export const Loading = styled.ActivityIndicator.attrs({
-  size: 'small',
-})`
-  margin: 8px 0;
-`;

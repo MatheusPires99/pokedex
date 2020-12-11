@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
 
 import Text from '../../../../components/Text';
+import Loading from '../../../../components/Loading';
 import api from '../../../../services/api';
 import { EvolutionChain } from '../../../../types';
 import { SlideProps } from '../tabs';
@@ -26,7 +26,7 @@ const Evolution = ({ pokemon }: SlideProps) => {
 
   const noResponseContent = useMemo(() => {
     if (loading) {
-      return <ActivityIndicator />;
+      return <Loading />;
     }
 
     return <Text color="grey">No evolutions.</Text>;
