@@ -1,8 +1,13 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { Animated } from 'react-native';
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   z-index: -2;
+
+  position: absolute;
+  bottom: 48px;
+  right: 0;
 
   align-items: flex-end;
   flex-direction: column-reverse;
