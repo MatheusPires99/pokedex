@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.View`
-  width: 100%;
+  flex: 1;
   height: 48px;
   padding: 0 24px;
   background: ${({ theme }) => theme.colors.semiGrey};
@@ -18,6 +18,7 @@ export const Icon = styled(Feather)`
 
 export const TextInput = styled.TextInput`
   flex: 1;
+  height: 100%;
   color: ${({ theme }) => theme.colors.black};
   ${({ theme }) => theme.textVariantes.input};
 `;
