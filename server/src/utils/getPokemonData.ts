@@ -14,7 +14,10 @@ const getPokemonData = async (value: string) => {
   );
 
   const pokemonFlavorTextIndex = pokemonSpecieData.flavor_text_entries.findIndex(
-    text => text.version.name === 'ruby' || text.version.name === 'y',
+    text =>
+      text.version.name === 'ruby' ||
+      text.version.name === 'platinum' ||
+      text.version.name === 'soulsilver',
   );
 
   const pokemonGeneraIndex = pokemonSpecieData.genera.findIndex(
