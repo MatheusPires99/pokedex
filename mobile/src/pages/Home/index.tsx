@@ -95,7 +95,7 @@ const Home = () => {
       <PokemonsList
         data={pokemons}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 24 }}
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 24 }}
         onEndReached={() => loadPokemons()}
         onEndReachedThreshold={0.1}
         onRefresh={refreshList}
