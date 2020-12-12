@@ -74,15 +74,21 @@ const About = ({ pokemon }: SlideProps) => {
 
           {pokemonGendersRate.map(gender => (
             <SectionText key={gender.gender} style={{ marginRight: 16 }}>
-              <Icon
-                name={
-                  gender.gender === 'male' ? 'male-symbol' : 'female-symbol'
-                }
-                color={gender.gender === 'male' ? '#6890F0' : '#EE99AC'}
-                size={16}
-              />
-              {'  '}
-              {gender.rate}%
+              {gender.gender === 'genderless' ? (
+                <Text bold>Genderless</Text>
+              ) : (
+                <>
+                  <Icon
+                    name={
+                      gender.gender === 'male' ? 'male-symbol' : 'female-symbol'
+                    }
+                    color={gender.gender === 'male' ? '#6890F0' : '#EE99AC'}
+                    size={16}
+                  />
+                  {'  '}
+                  {gender.rate}%
+                </>
+              )}
             </SectionText>
           ))}
         </SectionContent>
