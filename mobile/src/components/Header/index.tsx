@@ -1,9 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 
-import { Container } from './styles';
+import { Container, Content } from './styles';
 
 const Header = ({ children }: PropsWithChildren<unknown>) => {
-  return <Container>{children}</Container>;
+  return (
+    <Container>
+      <Content>{children}</Content>
+    </Container>
+  );
 };
 
 export default Header;
