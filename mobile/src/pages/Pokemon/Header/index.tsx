@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
 
-import { Container, HeaderContent, GoBackButton } from './styles';
+import { Container, GoBackButton } from './styles';
 
 type HeaderProps = {
   translateY: Animated.Value;
@@ -32,23 +32,21 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
 
   return (
     <Container>
-      <HeaderContent>
-        <GoBackButton onPress={handleGoBack}>
-          <Icon name="arrow-left" color={colors.white} size={24} />
-        </GoBackButton>
+      <GoBackButton onPress={handleGoBack}>
+        <Icon name="arrow-left" color={colors.white} size={24} />
+      </GoBackButton>
 
-        <Animated.View style={textStyle}>
-          <Text variant="body1" color="white" bold>
-            {pokemon.name}
-          </Text>
-        </Animated.View>
+      <Animated.View style={textStyle}>
+        <Text variant="body1" color="white" bold>
+          {pokemon.name}
+        </Text>
+      </Animated.View>
 
-        <Animated.View style={textStyle}>
-          <Text color="white" bold>
-            #{pokemon.pokedex_number}
-          </Text>
-        </Animated.View>
-      </HeaderContent>
+      <Animated.View style={textStyle}>
+        <Text color="white" bold>
+          #{pokemon.pokedex_number}
+        </Text>
+      </Animated.View>
     </Container>
   );
 };
