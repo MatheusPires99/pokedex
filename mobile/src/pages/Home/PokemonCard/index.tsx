@@ -27,6 +27,7 @@ const PokemonCard = ({
   const handleNavigateToPokemon = useCallback(() => {
     navigation.navigate('Pokemon', {
       pokemon,
+      from: 'card',
     });
   }, [navigation, pokemon]);
 

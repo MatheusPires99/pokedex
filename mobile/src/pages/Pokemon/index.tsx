@@ -21,6 +21,7 @@ import { Container, Content, DetailsContainer } from './styles';
 
 export type RouteParams = {
   pokemon: PokemonType;
+  from: 'card' | 'search';
 };
 
 const Pokemon = () => {

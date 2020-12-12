@@ -40,6 +40,7 @@ const SearchModal = () => {
     if (pokemon) {
       navigation.navigate('Pokemon', {
         pokemon,
+        from: 'search',
       });
     }
   }, [handleSearchPokemon, searchValue, navigation]);
