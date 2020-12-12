@@ -10,7 +10,7 @@ const pokemonController = new PokemonController();
 const typesEffectivenessController = new TypesEffectivenessController();
 const evolutionsController = new EvolutionsController();
 
-routes.get('/pokemons', pokemonController.show);
+routes.get('/pokemons', pokemonController.index);
 routes.get('/pokemons/:pokemon_name', pokemonController.show);
 routes.get('/effectiveness/:type', typesEffectivenessController.show);
 routes.get('/evolutions/:id', evolutionsController.show);
