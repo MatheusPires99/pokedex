@@ -14,7 +14,7 @@ const getPokemonData = async (value: string) => {
   );
 
   const pokemonFlavorTextIndex = pokemonSpecieData.flavor_text_entries.findIndex(
-    text => text.version.name === 'ruby',
+    text => text.version.name === 'ruby' || text.version.name === 'y',
   );
 
   const pokemonGeneraIndex = pokemonSpecieData.genera.findIndex(
@@ -71,7 +71,7 @@ const getPokemonData = async (value: string) => {
     name: pokemonSpecieData.names[pokemonNameIndex].name,
     description:
       pokemonSpecieData.flavor_text_entries[pokemonFlavorTextIndex].flavor_text,
-    image: getPokemonImageById(value),
+    image: getPokemonImageById(String(pokemonData.id)),
     genera: pokemonSpecieData.genera[pokemonGeneraIndex].genus,
     pokedex_number: pokemonData.id.toString().padStart(3, '0'),
     base_experience: pokemonData.base_experience,
