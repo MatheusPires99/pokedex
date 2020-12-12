@@ -14,17 +14,13 @@ import { Container, Button, PokedexNumber, PokemonImage } from './styles';
 type PokemonCardProps = {
   pokemon: Pokemon;
   afterThirdCard: boolean;
-  index: number;
   opacity: Animated.Value;
-  translateY: Animated.Value;
 };
 
 const PokemonCard = ({
   pokemon,
   afterThirdCard,
-  index,
   opacity,
-  translateY,
 }: PokemonCardProps) => {
   const navigation = useNavigation();
 
@@ -45,15 +41,6 @@ const PokemonCard = ({
       outputRange: [0, 1],
       extrapolate: 'clamp',
     }),
-    transform: [
-      {
-        translateY: translateY.interpolate({
-          inputRange: [0, 50],
-          outputRange: [0, 50 * (index + 1)],
-          extrapolate: 'clamp',
-        }),
-      },
-    ],
   };
 
   return (

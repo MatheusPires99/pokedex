@@ -7,10 +7,11 @@ import { Pokemon } from '../../types';
 import { useSearch } from '../../hooks/search';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
+import Header from '../../components/Header';
 
 import PokemonCard from './PokemonCard';
 import FloatingButton from './FloatingButton';
-import { Container, Header, PokemonsList } from './styles';
+import { Container, PokemonsList } from './styles';
 import SearchModal from './SearchModal';
 
 const Home = () => {
@@ -22,7 +23,6 @@ const Home = () => {
   const [loadingInitalData, setLoadingInitialData] = useState(true);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
 
   const opacity = useMemo(() => new Animated.Value(0), []);
   const translateY = useMemo(() => new Animated.Value(50), []);
@@ -110,9 +110,7 @@ const Home = () => {
             <PokemonCard
               pokemon={pokemon}
               afterThirdCard={!!(index + 2)}
-              index={index}
               opacity={opacity}
-              translateY={translateY}
             />
           );
         }}
@@ -120,7 +118,7 @@ const Home = () => {
 
       <FloatingButton />
 
-      {isSearching && <SearchModal setSearchValue={setSearchValue} />}
+      {isSearching && <SearchModal />}
     </Container>
   );
 };
