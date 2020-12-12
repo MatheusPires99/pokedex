@@ -1,21 +1,26 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Animated, KeyboardAvoidingView } from 'react-native';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
 import Input from '../../../components/Input';
 import Modal from '../../../components/Modal';
 import { useSearch } from '../../../hooks/search';
+import Loading from '../../../components/Loading';
 
 import { Content, SearchButtonContainer, SearchButton } from './styles';
 
-type SearchModalProps = {
-  setSearchValue: (value: string) => void;
-};
-
-const SearchModal = ({ setSearchValue }: SearchModalProps) => {
+const SearchModal = () => {
   const { colors } = useTheme();
-  const { handleToggleSearch } = useSearch();
+  const navigation = useNavigation();
+  const {
+    handleToggleSearch,
+    searchValue,
+    setSearchValue,
+    handleSearchPokemon,
+    loading,
+  } = useSearch();
 
   const [isFocussed, setIsFocussed] = useState(false);
 
@@ -28,6 +33,16 @@ const SearchModal = ({ setSearchValue }: SearchModalProps) => {
       useNativeDriver: false,
     }).start();
   }, [isFocussed, width]);
+
+  const handleSearch = useCallback(async () => {
+    const pokemon = await handleSearchPokemon(searchValue);
+
+    if (pokemon) {
+      navigation.navigate('Pokemon', {
+        pokemon,
+      });
+    }
+  }, [handleSearchPokemon, searchValue, navigation]);
 
   const widthStyle = width.interpolate({
     inputRange: [0, 48],
@@ -44,16 +59,21 @@ const SearchModal = ({ setSearchValue }: SearchModalProps) => {
         <Content>
           <Input
             icon="search"
-            placeholder="Search for a Pokemon name"
+            placeholder="Search for a Pokemon name..."
             setValue={setSearchValue}
             onFocus={() => setIsFocussed(true)}
             onBlur={() => setIsFocussed(false)}
+            autoCorrect={false}
           />
 
           {isFocussed && (
             <SearchButtonContainer style={{ width: widthStyle }}>
-              <SearchButton>
-                <Icon name="send" size={20} color={colors.white} />
+              <SearchButton onPress={handleSearch}>
+                {loading ? (
+                  <Loading color="white" />
+                ) : (
+                  <Icon name="send" size={20} color={colors.white} />
+                )}
               </SearchButton>
             </SearchButtonContainer>
           )}
