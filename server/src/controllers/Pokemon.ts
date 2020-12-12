@@ -29,10 +29,19 @@ export default class PokemonController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { pokemon_name } = request.params;
+    try {
+      const { pokemon_name } = request.params;
 
-    const pokemonData = await getPokemonData(String(pokemon_name));
+      const pokemonData = await getPokemonData(String(pokemon_name));
 
-    return response.json(pokemonData);
+      return response.json(pokemonData);
+    } catch (err) {
+      return response.status(404).json({
+        error: {
+          code: err.response.status,
+          message: err.response.data,
+        },
+      });
+    }
   }
 }
