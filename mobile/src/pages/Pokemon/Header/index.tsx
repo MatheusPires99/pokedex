@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
 
+import FavoriteButton from './FavoriteButton';
 import { Container, GoBackButton } from './styles';
 
 type HeaderProps = {
@@ -18,9 +19,7 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const handleGoBack = useCallback(() => navigation.navigate('Home'), [
-    navigation,
-  ]);
+  const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const textStyle = {
     opacity: translateY.interpolate({
@@ -42,11 +41,7 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
         </Text>
       </Animated.View>
 
-      <Animated.View style={textStyle}>
-        <Text color="white" bold>
-          #{pokemon.pokedex_number}
-        </Text>
-      </Animated.View>
+      <FavoriteButton pokemon={pokemon} />
     </Container>
   );
 };
