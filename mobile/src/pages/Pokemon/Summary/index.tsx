@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Animated, Easing } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
@@ -24,19 +24,6 @@ type SummaryProps = {
 const Summary = ({ pokemon, translateY }: SummaryProps) => {
   const translateXNumber = useMemo(() => new Animated.Value(100), []);
   const translateXGenera = useMemo(() => new Animated.Value(200), []);
-  const pokeballOpacity = useMemo(() => new Animated.Value(0), []);
-  const rotate = useMemo(() => new Animated.Value(0), []);
-
-  const rotatePokeball = useCallback(() => {
-    Animated.loop(
-      Animated.timing(rotate, {
-        toValue: 360,
-        duration: 4500,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-    ).start();
-  }, [rotate]);
 
   useEffect(() => {
     Animated.parallel([
@@ -52,19 +39,8 @@ const Summary = ({ pokemon, translateY }: SummaryProps) => {
         useNativeDriver: true,
         easing: Easing.inOut(Easing.quad),
       }),
-
-      Animated.delay(200),
-
-      Animated.timing(pokeballOpacity, {
-        toValue: 1,
-        duration: 350,
-        useNativeDriver: true,
-        easing: Easing.inOut(Easing.quad),
-      }),
     ]).start();
-
-    rotatePokeball();
-  }, [translateXNumber, translateXGenera, pokeballOpacity, rotatePokeball]);
+  }, [translateXNumber, translateXGenera]);
 
   const pokedexNumberStyle = {
     transform: [
@@ -127,36 +103,17 @@ const Summary = ({ pokemon, translateY }: SummaryProps) => {
     ],
   };
 
-  const pokeballStyle = {
-    opacity: pokeballOpacity.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-      extrapolate: 'clamp',
-    }),
-    transform: [
-      {
-        rotate: rotate.interpolate({
-          inputRange: [0, 360],
-          outputRange: ['0deg', '360deg'],
-          extrapolate: 'clamp',
-        }),
-      },
-    ],
-  };
-
   return (
     <>
       <Pokeball
         width={250}
         height={250}
-        style={[
-          {
-            position: 'absolute',
-            bottom: 0,
-            alignSelf: 'center',
-          },
-          pokeballStyle,
-        ]}
+        withRotate
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          alignSelf: 'center',
+        }}
       />
 
       <Container style={summaryStyle}>
