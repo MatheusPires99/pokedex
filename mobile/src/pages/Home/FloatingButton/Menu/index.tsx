@@ -13,6 +13,17 @@ type MenuProps = {
   translateX: Animated.Value;
 };
 
+const items = [
+  {
+    name: 'Search',
+    icon: 'search',
+  },
+  {
+    name: 'Favorite Pokémons',
+    icon: 'heart',
+  },
+];
+
 const Menu = ({ translateX }: MenuProps) => {
   const { colors } = useTheme();
   const { handleToggleSearch } = useSearch();
@@ -35,12 +46,14 @@ const Menu = ({ translateX }: MenuProps) => {
 
   return (
     <Container style={{ transform }}>
-      <Animated.View style={{ transform, opacity }}>
-        <ItemButton onPress={handleToggleSearch}>
-          <Text style={{ marginRight: 8 }}>Search</Text>
-          <Icon name="search" color={colors.lilac} size={18} />
-        </ItemButton>
-      </Animated.View>
+      {items.map((item, index) => (
+        <Animated.View key={index} style={{ opacity }}>
+          <ItemButton onPress={handleToggleSearch}>
+            <Text style={{ marginRight: 8 }}>{item.name}</Text>
+            <Icon name={item.icon} color={colors.lilac} size={18} />
+          </ItemButton>
+        </Animated.View>
+      ))}
     </Container>
   );
 };
