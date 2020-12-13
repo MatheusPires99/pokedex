@@ -17,7 +17,6 @@ interface SearchContextData {
   searchValue: string;
   setSearchValue: (value: string) => void;
   handleSearchPokemon: (pokemon_name: string) => Promise<Pokemon | undefined>;
-  loading: boolean;
 }
 
 const SearchContext = createContext<SearchContextData>({} as SearchContextData);
@@ -25,7 +24,6 @@ const SearchContext = createContext<SearchContextData>({} as SearchContextData);
 export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const handleToggleSearch = useCallback(() => {
     setIsSearching(!isSearching);
@@ -33,8 +31,6 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   const handleSearchPokemon = useCallback(async (pokemon_name: string) => {
     try {
-      setLoading(true);
-
       const pokemonNameInLowerCase = pokemon_name.toLowerCase();
 
       const { data: pokemon } = await api.get<Pokemon>(
@@ -47,8 +43,6 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
         'Erro ao buscar Pokemon',
         'Ocorreu um erro ao buscar este Pokemon, verifique se você digitou o nome corretamente.',
       );
-    } finally {
-      setLoading(false);
     }
   }, []);
 
@@ -60,8 +54,6 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
         searchValue,
         setSearchValue,
         handleSearchPokemon,
-
-        loading,
       }}
     >
       {children}

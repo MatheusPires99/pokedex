@@ -19,10 +19,10 @@ const SearchModal = () => {
     searchValue,
     setSearchValue,
     handleSearchPokemon,
-    loading,
   } = useSearch();
 
   const [isFocussed, setIsFocussed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const width = useMemo(() => new Animated.Value(0), []);
 
@@ -35,7 +35,11 @@ const SearchModal = () => {
   }, [isFocussed, width]);
 
   const handleSearch = useCallback(async () => {
+    setLoading(true);
+
     const pokemon = await handleSearchPokemon(searchValue);
+
+    setLoading(false);
 
     if (pokemon) {
       navigation.navigate('Pokemon', {
