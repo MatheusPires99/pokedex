@@ -6,6 +6,7 @@ import React, {
   useContext,
   PropsWithChildren,
 } from 'react';
+import { Alert } from 'react-native';
 
 import api from '../services/api';
 import { Pokemon } from '../types';
@@ -42,7 +43,10 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
 
       return pokemon;
     } catch (err) {
-      console.log(err);
+      Alert.alert(
+        'Erro ao buscar Pokemon',
+        'Ocorreu um erro ao buscar este Pokemon, verifique se você digitou o nome corretamente.',
+      );
     } finally {
       setLoading(false);
     }

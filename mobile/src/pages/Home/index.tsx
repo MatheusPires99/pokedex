@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Alert } from 'react-native';
 
 import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
@@ -29,38 +29,45 @@ const Home = () => {
 
   const loadPokemons = useCallback(
     async (offsetValue = offset, shouldRefresh = false) => {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const response = await api.get<Pokemon[]>('pokemons', {
-        params: {
-          offset: offsetValue,
-        },
-      });
+        const response = await api.get<Pokemon[]>('pokemons', {
+          params: {
+            offset: offsetValue,
+          },
+        });
 
-      const { data } = response;
+        const { data } = response;
 
-      if (loadingInitalData) {
-        setLoadingInitialData(false);
+        if (loadingInitalData) {
+          setLoadingInitialData(false);
+        }
+
+        setPokemons(shouldRefresh ? data : [...pokemons, ...data]);
+        setOffset(shouldRefresh ? API_OFFSET : API_OFFSET * counter);
+        setCounter(shouldRefresh ? 2 : counter + 1);
+        setLoading(false);
+
+        Animated.parallel([
+          Animated.timing(opacity, {
+            toValue: 1,
+            duration: 600,
+            useNativeDriver: true,
+          }),
+
+          Animated.timing(translateY, {
+            toValue: 0,
+            duration: 700,
+            useNativeDriver: true,
+          }),
+        ]).start();
+      } catch (err) {
+        Alert.alert(
+          'Erro ao carregador Pokemons',
+          'Ocorreu um erro ao carregar os Pokemons, tente novamente',
+        );
       }
-
-      setPokemons(shouldRefresh ? data : [...pokemons, ...data]);
-      setOffset(shouldRefresh ? API_OFFSET : API_OFFSET * counter);
-      setCounter(shouldRefresh ? 2 : counter + 1);
-      setLoading(false);
-
-      Animated.parallel([
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-
-        Animated.timing(translateY, {
-          toValue: 0,
-          duration: 700,
-          useNativeDriver: true,
-        }),
-      ]).start();
     },
     [pokemons, loadingInitalData, offset, counter, opacity, translateY],
   );
