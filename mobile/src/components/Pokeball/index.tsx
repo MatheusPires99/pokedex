@@ -67,7 +67,7 @@ const Pokeball = ({
   };
 
   return (
-    <Container style={[style, withRotate && pokeballStyle]}>
+    <Container style={[withRotate && pokeballStyle, style]}>
       <PokeballImage
         source={pokeballImage}
         width={width}
