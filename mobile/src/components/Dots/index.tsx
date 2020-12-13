@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Animated, ViewProps } from 'react-native';
 
 import { Container, Dot } from './styles';
 
-const Dots = () => {
+const Dots = ({ ...props }: Animated.AnimatedProps<ViewProps>) => {
   const [dots] = useState(Array.from(Array(15).keys()));
 
   return (
-    <Container>
+    <Container {...props}>
       <FlatList
         data={dots}
         keyExtractor={key => String(key)}

@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 import Constants from 'expo-constants';
+import { Animated } from 'react-native';
 
-export const Container = styled.View`
+export const Container = styled(Animated.View)`
   position: absolute;
   top: ${Constants.statusBarHeight - 28}px;
   right: 30%;
