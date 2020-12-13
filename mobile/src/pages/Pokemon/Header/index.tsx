@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
+import Pokeball from '../../../components/Pokeball';
 
 import FavoriteButton from './FavoriteButton';
 import { Container, GoBackButton } from './styles';
@@ -21,7 +22,7 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
 
   const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
 
-  const textStyle = {
+  const fadeStyle = {
     opacity: translateY.interpolate({
       inputRange: [-300, -200],
       outputRange: [1, 0],
@@ -35,13 +36,24 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
         <Icon name="arrow-left" color={colors.white} size={24} />
       </GoBackButton>
 
-      <Animated.View style={textStyle}>
+      <Animated.View style={fadeStyle}>
         <Text variant="body1" color="white" bold>
           {pokemon.name}
         </Text>
       </Animated.View>
 
       <FavoriteButton pokemon={pokemon} />
+
+      <Pokeball
+        width={150}
+        height={150}
+        withRotate
+        style={{
+          position: 'absolute',
+          right: -30,
+          ...fadeStyle,
+        }}
+      />
     </Container>
   );
 };
