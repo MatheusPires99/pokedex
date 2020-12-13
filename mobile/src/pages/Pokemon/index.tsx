@@ -82,6 +82,14 @@ const Pokemon = () => {
     [pokemon.types],
   );
 
+  const dotsStyle = {
+    opacity: translateY.interpolate({
+      inputRange: [-200, 0],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+  };
+
   return (
     <>
       <StatusBar style="light" backgroundColor="transparent" translucent />
@@ -92,7 +100,7 @@ const Pokemon = () => {
         }}
       >
         <Block />
-        <Dots />
+        <Dots style={dotsStyle} />
 
         <Content>
           <Header pokemon={pokemon} translateY={translateY} />
