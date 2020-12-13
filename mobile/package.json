@@ -15,6 +15,7 @@
   "dependencies": {
     "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^10.0.0",
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
