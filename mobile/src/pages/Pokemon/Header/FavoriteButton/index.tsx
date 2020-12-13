@@ -3,10 +3,8 @@ import { Alert } from 'react-native';
 import { useTheme } from 'styled-components';
 import { Feather as Icon, AntDesign as Icon2 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Pokemon } from '../../../../types';
-import Text from '../../../../components/Text';
 
 import { Container } from './styles';
 
@@ -39,14 +37,7 @@ const FavoriteButton = ({ pokemon }: FavoriteButtonProps) => {
     loadFavoritePokemons();
   }, [pokemon]);
 
-  const handleClear = useCallback(async () => {
-    await AsyncStorage.removeItem('@Pokedex:pokemons');
-
-    pokemons.splice(0, pokemons.length);
-    setIsFavorite(false);
-  }, [pokemons]);
-
-  const handleFavoritePokemon = useCallback(async () => {
+  const handleToggleFavorite = useCallback(async () => {
     try {
       const storagedPokemons = await AsyncStorage.getItem('@Pokedex:pokemons');
 
@@ -54,33 +45,58 @@ const FavoriteButton = ({ pokemon }: FavoriteButtonProps) => {
         storagedPokemons || JSON.stringify(''),
       );
 
-      pokemons.push(...parsedPokemons, pokemon);
+      if (isFavorite) {
+        Alert.alert(
+          'Remover dos favoritos?',
+          `Tem certeza que quer remover ${pokemon.name} dos seus Pokémons favoritos?`,
+          [
+            {
+              text: 'Remover',
+              onPress: async () => {
+                const updatedPokemons = parsedPokemons.filter(
+                  parsedPokemon => parsedPokemon.id !== pokemon.id,
+                );
 
-      await AsyncStorage.setItem('@Pokedex:pokemons', JSON.stringify(pokemons));
+                await AsyncStorage.setItem(
+                  '@Pokedex:pokemons',
+                  JSON.stringify(updatedPokemons),
+                );
 
-      setIsFavorite(true);
+                setIsFavorite(false);
+              },
+            },
+            {
+              text: 'Cancelar',
+              style: 'cancel',
+            },
+          ],
+        );
+      } else {
+        pokemons.push(...parsedPokemons, pokemon);
+
+        await AsyncStorage.setItem(
+          '@Pokedex:pokemons',
+          JSON.stringify(pokemons),
+        );
+
+        setIsFavorite(true);
+      }
     } catch (err) {
       Alert.alert(
         'Erro ao favoritar',
         'Ocorreu um erro ao favoritar este Pokémon, tente navamente.',
       );
     }
-  }, [pokemons, pokemon]);
+  }, [isFavorite, pokemons, pokemon]);
 
   return (
-    <>
-      <TouchableOpacity onPress={handleClear}>
-        <Text>Clear</Text>
-      </TouchableOpacity>
-
-      <Container onPress={handleFavoritePokemon}>
-        {isFavorite ? (
-          <Icon2 name="heart" color={colors.white} size={22} />
-        ) : (
-          <Icon name="heart" color={colors.white} size={22} />
-        )}
-      </Container>
-    </>
+    <Container onPress={handleToggleFavorite}>
+      {isFavorite ? (
+        <Icon2 name="heart" color={colors.white} size={22} />
+      ) : (
+        <Icon name="heart" color={colors.white} size={22} />
+      )}
+    </Container>
   );
 };
 
