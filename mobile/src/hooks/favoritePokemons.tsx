@@ -31,6 +31,8 @@ export const FavoritePokemonsProvider = ({
     if (pokemons && pokemons !== '[]') {
       setFavoritePokemons(JSON.parse(pokemons));
     } else {
+      setFavoritePokemons([]);
+
       Alert.alert(
         'No Pokémons found',
         'It looks like you do not have any Pokémons on your favorite list.',
