@@ -4,7 +4,7 @@ import { View, Animated, Alert } from 'react-native';
 import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
 import { Pokemon } from '../../types';
-import { useSearch } from '../../hooks';
+import useSearch from '../../hooks/search';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
 import Header from '../../components/Header';
@@ -64,8 +64,8 @@ const Home = () => {
         ]).start();
       } catch (err) {
         Alert.alert(
-          'Erro ao carregador Pokemons',
-          'Ocorreu um erro ao carregar os Pokemons, tente novamente',
+          'Fail to get Pokémons',
+          'An error has ocurred when try to load the Pokémons, please try again.',
         );
       }
     },

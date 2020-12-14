@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components';
 
 import Text from '../../../../components/Text';
 import { MENU_ITEM_TRANSLATE_X } from '../index';
-import { useSearch } from '../../../../hooks';
+import useSearch from '../../../../hooks/search';
 
 import { Container, ItemButton } from './styles';
 
