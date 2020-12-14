@@ -8,7 +8,6 @@ import { Pokemon } from '../../../types';
 import Text from '../../../components/Text';
 import Pokeball from '../../../components/Pokeball';
 
-import FavoriteButton from './FavoriteButton';
 import { Container, GoBackButton } from './styles';
 
 type HeaderProps = {
@@ -42,7 +41,11 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
         </Text>
       </Animated.View>
 
-      <FavoriteButton pokemon={pokemon} />
+      <Animated.View style={fadeStyle}>
+        <Text variant="body3" color="white" bold>
+          #{pokemon.pokedex_number}
+        </Text>
+      </Animated.View>
 
       <Pokeball
         width={150}
@@ -50,7 +53,7 @@ const Header = ({ pokemon, translateY }: HeaderProps) => {
         withRotate
         style={{
           position: 'absolute',
-          right: -30,
+          right: -32,
           ...fadeStyle,
         }}
       />

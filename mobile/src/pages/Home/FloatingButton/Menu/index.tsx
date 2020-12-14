@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { Animated } from 'react-native';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
-import { useNavigation } from '@react-navigation/native';
 
 import Text from '../../../../components/Text';
 import { MENU_ITEM_TRANSLATE_X } from '../index';
@@ -19,15 +18,10 @@ const items = [
     name: 'Search',
     icon: 'search',
   },
-  {
-    name: 'Favorite Pokémons',
-    icon: 'heart',
-  },
 ];
 
 const Menu = ({ translateX }: MenuProps) => {
   const { colors } = useTheme();
-  const navigation = useNavigation();
   const { handleToggleSearch } = useSearch();
 
   const onPress = useCallback(
@@ -35,12 +29,8 @@ const Menu = ({ translateX }: MenuProps) => {
       if (name === 'Search') {
         handleToggleSearch();
       }
-
-      if (name === 'Favorite Pokémons') {
-        navigation.navigate('FavoritePokemons');
-      }
     },
-    [handleToggleSearch, navigation],
+    [handleToggleSearch],
   );
 
   const transform = [
