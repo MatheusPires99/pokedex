@@ -40,8 +40,8 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
       return pokemon;
     } catch (err) {
       Alert.alert(
-        'Erro ao buscar Pokemon',
-        'Ocorreu um erro ao buscar este Pokemon, verifique se você digitou o nome corretamente.',
+        'Fail to get Pokémon',
+        'An error has ocurred when try to load this Pokémon, check if you typed it`s name correct.',
       );
     }
   }, []);
