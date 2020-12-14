@@ -61,7 +61,7 @@ export const SearchProvider = ({ children }: PropsWithChildren<unknown>) => {
   );
 };
 
-export function useSearch(): SearchContextData {
+export default function useSearch(): SearchContextData {
   const context = useContext(SearchContext);
 
   return context;
