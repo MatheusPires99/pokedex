@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components';
 
 import Text from '../../../../components/Text';
 import { MENU_ITEM_TRANSLATE_X } from '../index';
-import { useSearch } from '../../../../hooks/search';
+import { useSearch, useFavoritePokemons } from '../../../../hooks';
 
 import { Container, ItemButton } from './styles';
 
@@ -27,6 +27,7 @@ const items = [
 const Menu = ({ translateX }: MenuProps) => {
   const { colors } = useTheme();
   const { handleToggleSearch } = useSearch();
+  const { handleGetFavoritePokemons } = useFavoritePokemons();
 
   const transform = [
     {
@@ -46,14 +47,21 @@ const Menu = ({ translateX }: MenuProps) => {
 
   return (
     <Container style={{ transform }}>
-      {items.map((item, index) => (
-        <Animated.View key={index} style={{ opacity }}>
-          <ItemButton onPress={handleToggleSearch}>
-            <Text style={{ marginRight: 8 }}>{item.name}</Text>
-            <Icon name={item.icon} color={colors.lilac} size={18} />
-          </ItemButton>
-        </Animated.View>
-      ))}
+      {items.map((item, index) => {
+        const onPress =
+          item.name === 'Search'
+            ? handleToggleSearch
+            : handleGetFavoritePokemons;
+
+        return (
+          <Animated.View key={index} style={{ opacity }}>
+            <ItemButton onPress={onPress}>
+              <Text style={{ marginRight: 8 }}>{item.name}</Text>
+              <Icon name={item.icon} color={colors.lilac} size={18} />
+            </ItemButton>
+          </Animated.View>
+        );
+      })}
     </Container>
   );
 };

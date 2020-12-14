@@ -4,7 +4,7 @@ import { View, Animated, Alert } from 'react-native';
 import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
 import { Pokemon } from '../../types';
-import { useSearch } from '../../hooks/search';
+import { useSearch, useFavoritePokemons } from '../../hooks';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
 import Header from '../../components/Header';
@@ -16,6 +16,9 @@ import SearchModal from './SearchModal';
 
 const Home = () => {
   const { isSearching } = useSearch();
+  const { favoritePokemons } = useFavoritePokemons();
+
+  console.log(favoritePokemons);
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [offset, setOffset] = useState(0);

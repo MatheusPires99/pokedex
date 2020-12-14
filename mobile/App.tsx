@@ -14,7 +14,7 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from './src/styles/theme';
 import Routes from './src/routes';
-import AppProvider from './src/hooks';
+import { AppProvider } from './src/hooks';
 
 const App = () => {
   const [fontsLoaded] = useFonts({

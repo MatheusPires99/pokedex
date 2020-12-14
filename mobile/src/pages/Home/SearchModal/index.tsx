@@ -4,9 +4,9 @@ import { MaterialIcons as Icon } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
+import { useSearch } from '../../../hooks';
 import Input from '../../../components/Input';
 import Modal from '../../../components/Modal';
-import { useSearch } from '../../../hooks/search';
 import Loading from '../../../components/Loading';
 
 import { Content, SearchButtonContainer, SearchButton } from './styles';
