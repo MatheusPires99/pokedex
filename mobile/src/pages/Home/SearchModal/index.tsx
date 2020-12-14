@@ -64,7 +64,7 @@ const SearchModal = () => {
         <Content>
           <Input
             icon="search"
-            placeholder="Search for a Pokemon name..."
+            placeholder="Search for a Pokémon name..."
             setValue={setSearchValue}
             onFocus={() => setIsFocussed(true)}
             onBlur={() => setIsFocussed(false)}
