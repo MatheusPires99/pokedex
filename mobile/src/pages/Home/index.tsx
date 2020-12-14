@@ -4,27 +4,24 @@ import { View, Animated, Alert } from 'react-native';
 import api from '../../services/api';
 import { API_OFFSET } from '../../constants';
 import { Pokemon } from '../../types';
-import { useSearch, useFavoritePokemons } from '../../hooks';
+import { useSearch } from '../../hooks';
 import Text from '../../components/Text';
 import Loading from '../../components/Loading';
 import Header from '../../components/Header';
 
 import PokemonCard from './PokemonCard';
 import FloatingButton from './FloatingButton';
-import { Container, PokemonsList } from './styles';
 import SearchModal from './SearchModal';
+import { Container, PokemonsList } from './styles';
 
 const Home = () => {
   const { isSearching } = useSearch();
-  const { favoritePokemons } = useFavoritePokemons();
-
-  console.log(favoritePokemons);
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [offset, setOffset] = useState(0);
   const [counter, setCounter] = useState(1);
   const [loadingInitalData, setLoadingInitialData] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const opacity = useMemo(() => new Animated.Value(0), []);
