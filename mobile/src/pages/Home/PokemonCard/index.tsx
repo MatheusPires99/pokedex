@@ -14,12 +14,14 @@ import { Container, Button, PokedexNumber, PokemonImage } from './styles';
 type PokemonCardProps = {
   pokemon: Pokemon;
   afterThirdCard: boolean;
+  rightCard: boolean;
   opacity: Animated.Value;
 };
 
 const PokemonCard = ({
   pokemon,
   afterThirdCard,
+  rightCard,
   opacity,
 }: PokemonCardProps) => {
   const navigation = useNavigation();
@@ -48,6 +50,7 @@ const PokemonCard = ({
     <Container style={containerStyle}>
       <Button
         afterThirdCard={afterThirdCard}
+        rightCard={rightCard}
         style={{
           backgroundColor,
         }}

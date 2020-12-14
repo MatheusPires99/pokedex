@@ -77,6 +77,11 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const ListFooterComponent = useMemo(
+    () => (loading ? <Loading style={{ marginVertical: 8 }} /> : <></>),
+    [loading],
+  );
+
   const refreshList = useCallback(async () => {
     setRefreshing(true);
 
@@ -107,9 +112,7 @@ const Home = () => {
         onEndReachedThreshold={0.1}
         onRefresh={refreshList}
         refreshing={refreshing}
-        ListFooterComponent={
-          loading ? <Loading style={{ marginVertical: 8 }} /> : <></>
-        }
+        ListFooterComponent={ListFooterComponent}
         keyExtractor={pokemon => String(pokemon.id)}
         numColumns={2}
         renderItem={({ item: pokemon, index }) => {
@@ -117,6 +120,7 @@ const Home = () => {
             <PokemonCard
               pokemon={pokemon}
               afterThirdCard={!!(index + 2)}
+              rightCard={!!(index % 2)}
               opacity={opacity}
             />
           );
