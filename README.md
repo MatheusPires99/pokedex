@@ -28,7 +28,7 @@
 ## :page_with_curl: Sobre
 Este repositório contém um monorepo da aplicação Pokedex.
 
-A Pokedex é uma aplicação no qual o usuário pode visualizar uma listagem de Pokémons, buscar e ver os detalhes de um Pokémon específico. Para buscar os dados dos Pokémons foi utilizada a [PokéAPI](https://pokeapi.co/).
+A Pokedex é uma aplicação no qual o usuário pode visualizar uma listagem de Pokémons, buscar e ver os detalhes de um Pokémon específico. Para obter os dados dos Pokémons foi utilizada a [PokéAPI](https://pokeapi.co/).
 
 O objetivo principal desse projeto foi conhecer e aprender como funciona as animações e gestos no React Native. Para isso foi utilizado principalmente a [Animated API](https://reactnative.dev/docs/animated) do próprio React Native.
 
