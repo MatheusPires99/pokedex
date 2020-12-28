@@ -57,15 +57,15 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
   # Entrar no diretório:
   $ cd pokedex
+  
+  # Instalar as dependências:
+  $ yarn
 ```
 
 ## :iphone: Iniciando mobile
 ```bash
   # Entrar no diretório do mobile:
   $ cd mobile
-
-  # Instalar as dependências:
-  $ yarn
 
   # Iniciar a aplicação:
   $ yarn start
@@ -75,9 +75,6 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ```bash
   # Entrar no diretório do servidor:
   $ cd server
-
-  # Instalar as dependências:
-  $ yarn
 
   # Iniciar a aplicação:
   $ yarn start
